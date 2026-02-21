@@ -50,6 +50,42 @@ function ucondieresis_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'ucondieresis_enqueue_assets');
 
 /**
+ * Cargar archivos del tema
+ */
+
+// Cargar helpers
+if (file_exists(UCONDIERESIS_DIR . '/inc/helpers.php')) {
+    require_once UCONDIERESIS_DIR . '/inc/helpers.php';
+}
+
+/**
+ * Filtros personalizados para productos
+ */
+function ucondieresis_custom_body_class($classes) {
+    if (is_singular('productos')) {
+        $classes[] = 'single-producto';
+    }
+    
+    if (is_post_type_archive('productos')) {
+        $classes[] = 'archive-productos';
+    }
+    
+    return $classes;
+}
+add_filter('body_class', 'ucondieresis_custom_body_class');
+
+/**
+ * Incluir productos en búsqueda global
+ */
+function ucondieresis_extend_search($query) {
+    if (!is_admin() && $query->is_search()) {
+        $query->set('post_type', ['post', 'page', 'productos']);
+    }
+    return $query;
+}
+add_filter('pre_get_posts', 'ucondieresis_extend_search');
+
+/**
  * Funciones personalizadas
  */
 

@@ -1,104 +1,349 @@
-# Migración de ucondieresis.com a WordPress
+# 🎨 Ü con Diéresis - WordPress Migration
 
-## Pasos para configurar el entorno local
+> **Proyecto**: Migración de ucondieresis.com desde Weebly a WordPress  
+> **Estado**: 🟢 FASE 1 COMPLETADA | 🔄 FASE 2 EN PROGRESO  
+> **Deadline**: 20 Marzo 2026 (30 días)  
+> **Versión**: 2.0 - Estado post FASE 1
 
-1. **Instala Docker Desktop**:
-   - Descarga e instala Docker Desktop para macOS desde https://www.docker.com/products/docker-desktop.
-   - Inicia Docker Desktop.
+---
 
-2. **Ejecuta el entorno WordPress**:
-   - Abre una terminal en esta carpeta.
-   - Ejecuta: `docker-compose up -d`
-   - Esto iniciará WordPress en http://localhost:8000
+## 📌 Resumen Ejecutivo
 
-3. **Configura WordPress**:
-   - Ve a http://localhost:8000 en tu navegador.
-   - Completa la instalación inicial (idioma: Español, título: Ü con Diéresis, etc.).
+Migración estratégica del sitio estático Weebly a plataforma WordPress escalable con **Custom Post Type inteligente** como fundamento. Sistema estructurado para crecimiento futuro sin rediseño.
 
-4. **Instala plugins esenciales**:
-   - WooCommerce para e-commerce.
-   - Elementor para diseño de páginas.
-   - Otros según necesidad.
+**Filosofía**: *"Si primero hacemos diseño se ve bonito pero no escala. Si primero hacemos estructura es escalable y es vendible."*
 
-## Migración del contenido
+### Estado Actual
 
-- **Imágenes**: Descarga las imágenes del sitio actual y súbelas a WordPress Media Library.
-- **Contenido**: Copia el texto de las páginas y recrea en WordPress.
-- **Productos**: Exporta productos de GoDaddy como CSV y importa con WooCommerce.
+| Aspecto | Estado | Detalles |
+|---------|--------|----------|
+| **CPT Foundation** | ✅ LISTO | Slug: `productos` (9 chars), 4 meta boxes |
+| **Taxonomías** | ✅ LISTO | Ocasión (8 términos) + Categoría (6 términos) |
+| **Contenido** | 🔄 LIMPIO | Sistema vacío, listo para desarrollo |
+| **Tema WordPress** | 🔄 EN DESARROLLO | Fase 2 activa - crear templates desde cero |
+| **Integración Contacto** | ⏳ PENDIENTE | WhatsApp + Formularios |
+| **GoDaddy Deploy** | ⏳ PENDIENTE | Últimas 2 semanas Marzo |
 
-## Flujo de desarrollo
+**Progreso General**: 35% (Infraestructura lista, desarrollo desde cero)
 
-### 1. Instalar extensiones recomendadas en VS Code:
-- **PHP IntelliSense**: Autocompletado para PHP
-- **WordPress Development**: Snippets y herramientas de WordPress
-- **SFTP**: Para subir archivos a GoDaddy
-- **GitLens**: Mejora la visualización de Git
+---
 
-Abre VS Code y verás una notificación de extensiones recomendadas.
+## � Inicio Rápido
 
-### 2. Desarrollo local:
-```bash
-# Los cambios se sincronizan automáticamente en:
-# http://localhost:8000
+### Requisitos
+- Docker & Docker Compose
+- macOS (actualmente configurado para CloudDocs)
+- Python 3 (para scripts de migración)
 
-# Para ver los logs:
-docker-compose logs -f wordpress
-
-# Para acceder a WordPress admin:
-# http://localhost:8000/wp-admin
-```
-
-### 3. Estructura de desarrollo:
-```
-wp-content/
-├── themes/
-│   └── ucondieresis/          # Tu tema personalizado
-├── plugins/
-│   └── ucondieresis-custom/   # Plugins personalizados
-└── uploads/                    # Imágenes (ignorado en Git)
-```
-
-### 4. Control de versiones (Git):
-```bash
-# Ver cambios
-git status
-
-# Confirmar cambios
-git add .
-git commit -m "Descripción de cambios"
-
-# Ver historial
-git log --oneline
-```
-
-## Deploying to GoDaddy
-
-### Antes de subir a GoDaddy:
-
-1. **Configura SFTP** en `.vscode/sftp.json`:
-   - Reemplaza `your-godaddy-ftp-host.com` con tu host
-   - Reemplaza `your-godaddy-username` con tu usuario
-   - Reemplaza `your-godaddy-password` con tu contraseña
-
-2. **Instala la extensión SFTP**:
-   - Abre VS Code
-   - Vé a Extensions (Cmd+Shift+X)
-   - Busca "SFTP" y instala "SFTP" de liximomo
-
-3. **Sube los cambios**:
-   - Haz clic derecho en la carpeta `wp-content` en Explorer
-   - Selecciona "Upload Folder"
-   - Los archivos se subirán a GoDaddy automáticamente
-
-### O usa Git y GitHub para CI/CD (recomendado):
+### Setup Local
 
 ```bash
-# Crear repositorio en GitHub
-git remote add origin https://github.com/tu-usuario/ucondieresis-wordpress.git
-git branch -M main
-git push -u origin main
+# Navegar al proyecto
+cd "/Users/ericklopez/Library/Mobile Documents/com~apple~CloudDocs/Code/ucondieresis-wordpress"
+
+# Iniciar ambiente
+docker-compose up -d
+
+# Verificar instalación
+docker exec ucondieresis-wordpress-wordpress-1 wp --allow-root core version
 ```
 
-## Próximos pasos
+### Acceso
 
-Una vez configurado localmente, migra a GoDaddy siguiendo la guía proporcionada.
+- **WordPress Admin**: http://localhost:8000/wp-admin
+- **Usuario**: `955510pwpadmin`
+- **Contraseña**: `wordpress`
+- **Frontend**: http://localhost:8000
+
+---
+
+## 📋 Estructura del Proyecto
+
+```
+ucondieresis-wordpress/
+├── wp-content/
+│   ├── plugins/
+│   │   ├── ucondieresis-custom/          # PLUGIN PRINCIPAL ⭐
+│   │   │   ├── ucondieresis-custom.php   # Entry point Singleton
+│   │   │   ├── includes/
+│   │   │   │   ├── class-plugin.php
+│   │   │   │   ├── class-cpt-productos.php    # 400+ líneas, 4 meta boxes
+│   │   │   │   └── class-taxonomies.php       # 2 taxonomías + auto-términos
+│   │   │   └── languages/
+│   │   └── [otros plugins nativos]
+│   └── themes/
+│       └── ucondieresis/                 # Tema base (mínimo) 🔄 EN DESARROLLO
+│           └── .copilot-context.md       # PROMPT MAESTRO
+├── scripts/
+│   ├── download_images_and_build_wxr.py
+│   ├── build_valid_wxr.py                # Script mejorado con fix XML
+│   └── build_full_wxr.py
+├── docker-compose.yml                    # Configuración de contenedores
+├── FASE_1_COMPLETADO.md                  # 📄 Documentación Fase 1 NUEVA
+├── DESARROLLO.md                         # Guía de desarrollo
+├── MIGRACION_GODADDY.md                  # Instrucciones migración final
+├── .copilot-context.md                   # Guidelines generales proyecto
+└── README.md                              # Este archivo
+```
+
+---
+
+## 🎯 FASE 1: Fundamento Inteligente ✅ COMPLETADO
+
+**Objetivo**: Establecer base técnica escalable con CPT y estructura organizada.
+
+### Entregables
+
+✅ **Custom Post Type `productos`**
+- 9 caracteres (dentro del límite de 20)
+- Soporte Gutenberg completo
+- 4 Meta Boxes validados
+- REST API habilitada
+
+✅ **Taxonomías Inteligentes**
+- `ocasion`: Cumpleaños, Bodas, Aniversarios, Corporativo, Regalos, Eventos
+- `categoria_producto`: Tazas, Mochilas, Cuadernos, Bolsas, Playeras, Accesorios
+
+✅ **Contenido Base**
+- 4 Productos personalizados (con taxonomías)
+- 6 Páginas importadas del backup Weebly
+- Menú principal con navegación
+
+✅ **Documentación**
+- PROMPT MAESTRO con 9 reglas técnicas
+- Guías de desarrollo y estructura
+- Este README actualizado
+
+**Ver**: [FASE_1_COMPLETADO.md](FASE_1_COMPLETADO.md) para detalles completos.
+
+---
+
+## 🔄 FASE 2: Desarrollo desde Cero (INICIANDO)
+
+**Objetivo**: Construir sitio completamente funcional desde la estructura lista.
+
+### Tareas Inmediatas
+
+1. **Crear 6 páginas principales**
+   - [ ] Inicio (homepage)
+   - [ ] Nosotros
+   - [ ] Catálogos / Productos
+   - [ ] Galería
+   - [ ] Contacto
+   - [ ] Aviso de Privacidad
+
+2. **Crear menú de navegación**
+   - [ ] "Menú Principal" con 6 items
+   - [ ] Asignar a ubicación primary
+
+3. **Desarrollar tema WordPress**
+   - [ ] index.php (template default)
+   - [ ] header.php y footer.php  
+   - [ ] archive-productos.php (listado de productos)
+   - [ ] single-productos.php (detalle de producto)
+   - [ ] page.php (template para páginas)
+   - [ ] home.php (homepage personalizada)
+
+4. **Estilo y diseño**
+   - [ ] Style.css base
+   - [ ] Responsive mobile-first
+   - [ ] Brand colors y tipografía
+
+5. **Contenido CPT**
+   - [ ] Crear 8-10 productos iniciales
+   - [ ] Asignar taxonomías
+   - [ ] Subir imágenes
+
+6. **Funcionalidad**
+   - [ ] Integración WhatsApp
+   - [ ] Formulario de contacto
+   - [ ] Botones CTA
+
+---
+
+## 📚 DOCUMENTACIÓN COMPLETA
+
+| Documento | Propósito | Estado |
+|-----------|----------|--------|
+| **DEVELOPMENT.md** | Guía técnica desarrollo | ✅ Actualizado |
+| **FASE_1_COMPLETADO.md** | Resumen Fase 1 completo | ✅ NUEVO - Completo |
+| **MIGRACION_GODADDY.md** | Pasos para deploy | ⏳ Revisar |
+| **.copilot-context.md** | PROMPT MAESTRO | ✅ En tema |
+| **README.md** | Overview proyecto | ✅ Este archivo |
+
+---
+
+## 🛠️ Comandos Útiles
+
+### WordPress CLI
+
+```bash
+# Dentro del contenedor
+docker exec ucondieresis-wordpress-wordpress-1 wp --allow-root
+
+# Ejemplos comunes
+wp post list --post_type=productos               # Listar productos
+wp plugin list                                   # Listar plugins
+wp theme list                                    # Listar temas
+wp option get siteurl                            # Ver URL del sitio
+```
+
+### Docker
+
+```bash
+# Ver logs
+docker logs ucondieresis-wordpress-wordpress-1
+
+# Acceder a bash
+docker exec -it ucondieresis-wordpress-wordpress-1 bash
+
+# Reiniciar
+docker-compose down && docker-compose up -d
+```
+
+### Python Scripts
+
+```bash
+# Descargar imágenes y crear WXR
+python3 scripts/download_images_and_build_wxr.py
+
+# Retry descargas
+python3 scripts/retry_download_images.py
+```
+
+---
+
+## 🗂️ CONTENIDO ACTUAL
+
+### Productos (CPT: `productos`)
+
+| ID | Título | Ocasión | Categoría | Estado |
+|----|--------|---------|-----------|--------|
+| - | *Vacío - Listo para crear* | - | - | 🟢 PRONTO |
+
+### Páginas (Post Type: `page`)
+
+| ID | Título | Estado |
+|----|--------|--------|
+| - | *Vacía - Listo para crear* | 🟢 PRONTO |
+
+**Nota**: Sistema completamente limpio. Backup disponible en `backup-limpieza-[timestamp].xml`
+
+---
+
+## 🔐 Seguridad y Performance
+
+### Implementado
+- ✅ Nonce validation en meta boxes
+- ✅ Sanitización de input
+- ✅ Namespace para evitar conflictos
+- ✅ Debug mode local activado
+
+### Roadmap
+- [ ] Instalar security plugin
+- [ ] Implementar caching
+- [ ] Optimizar imágenes
+- [ ] Rate limiting en contacto
+
+---
+
+## 📅 Timeline Recomendado
+
+```
+HOY (21 Feb)       ✅ FASE 1 COMPLETADA
+└─ Semana 1        🔄 FASE 2: Tema + Home
+   └─ Semana 2     🔄 FASE 2: Media + Contacto
+      └─ Semana 3  ⏳ FASE 2: Testing
+         └─ Semana 4 (20 Mar) ⏳ FASE 3: GoDaddy Deploy
+```
+
+**Fecha Crítica**: 20 Marzo, 2026
+- Sitio Weebly original se elimina en GoDaddy
+- Necesitamos estar live antes
+
+---
+
+## 🎨 Guías Importantes
+
+### Valores de Marca (ver `.copilot-context.md`)
+- Personalización como diferenciador clave
+- Calidad artesanal + tecnología moderna
+- Enfoque al cliente individual
+- México como mercado principal
+
+### Reglas Técnicas
+1. Usar namespaces `Ucondieresis`
+2. Comentarios en español/inglés
+3. DRY principle - helpers para queries comunes
+4. WordPress standards y hooks
+5. Validar TODO user input
+6. Testing antes de merge
+7. Documentar cambios importantes
+8. Mantener changelog
+9. No hardcodear valores
+
+---
+
+## 🔗 URLs Importantes
+
+| Recurso | URL |
+|---------|-----|
+| **Frontend** | http://localhost:8000 |
+| **Admin** | http://localhost:8000/wp-admin |
+| **Productos** | http://localhost:8000/productos |
+| **Producto Único** | http://localhost:8000/?productos=taza-personalizada-geometrica |
+| **Debug Log** | `/wp-content/debug.log` (local) |
+
+---
+
+## 📞 Contacto / Notas
+
+- **Backup Original**: `/Users/ericklopez/Library/Mobile Documents/com~apple~CloudDocs/Code/ucondieresis-backup/`
+- **WXR Generado**: `/Users/ericklopez/Library/Mobile Documents/com~apple~CloudDocs/Code/ucondieresis-wordpress/ucondieresis-wxr-full.xml`
+- **Status Notificaciones**: Ver GitHub issues / discussion
+
+---
+
+## ✨ Próximos Pasos Inmediatos
+
+1. **Esta Semana**
+   - Desarrollar tema WordPress (templates básicos)
+   - Crear home page mejorada con featured products
+   - Subir media/imágenes
+
+2. **Semana Próxima**
+   - Integrar sistema de contacto
+   - Ajustes de diseño
+   - Testing cross-browser
+
+3. **Fase Final**
+   - Preparar migración GoDaddy
+   - Testing en producción
+   - Optimización SEO final
+
+---
+
+## 📝 Changelog
+
+### v2.0 (21 Febrero, 2026)
+- ✅ FASE 1 COMPLETADA
+- ✅ CPT `productos` registrado correctamente
+- ✅ 6 páginas importadas de backup
+- ✅ 4 productos de prueba creados
+- ✅ Menú principal establecido
+- ✅ Debug habilitado
+- 📄 Documento FASE_1_COMPLETADO.md creado
+- 📝 README actualizado v2.0
+
+### v1.0 (20 Febrero, 2026)
+- Initial setup
+- Plugin scaffold
+- Docker environment
+- WP-CLI integration
+
+---
+
+**Actualizado**: 21 Febrero, 2026  
+**Versión**: 2.0  
+**Mantenedor**: GitHub Copilot + Manual Review  
+**Licencia**: Privado (ucondieresis.com)

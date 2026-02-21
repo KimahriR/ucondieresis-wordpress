@@ -1,4 +1,4 @@
-# WordPress
+# === WORDPRESS CORE ===
 wp-config.php
 wp-content/uploads/
 wp-content/backup-*
@@ -8,38 +8,62 @@ wp-content/temp/
 wp-content/temp-*
 wp-content/plugins/hello.php
 wp-content/plugins/akismet/
+wp-settings.php
+wp-signup.php
 
-# Database
+# === DATABASE ===
 *.sql
 *.sql.gz
+/backup/
+/db_backups/
 
-# Node modules (si usas build tools)
+# === NODE & BUILD ===
 node_modules/
+package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+dist/
+build/
+.sass-cache/
+*.min.js
+*.min.css
 
-# IDE
-.vscode/
+# === IDE & EDITOR ===
+.vscode/sftp.json
+.vscode/workspace.json
 .idea/
+*.sublime-project
+*.sublime-workspace
 *.swp
 *.swo
 *~
 .DS_Store
 
-# Environment
+# === ENVIRONMENT ===
 .env
 .env.local
 .env.*.local
+.env.prod.local
 
-# Logs
+# === LOGS ===
 debug.log
 error.log
+*.log
+/wp-content/debug.log
 
-# Operating System
+# === SISTEMA ===
 Thumbs.db
 .Thumbs.db
+*.tmp
+*.bak
 
-# Dependencies
+# === PHP COMPOSER ===
 /vendor
 composer.lock
+
+# === MISC ===
+.history/
+*.code-workspace
+.vscode/*.json
+!.vscode/extensions.json
