@@ -1,0 +1,16 @@
+<?php
+/*
+Theme Name: Ü con Diéresis
+Theme URI: https://ucondieresis.com
+Description: Tema personalizado para Ü con Diéresis
+Version: 1.0.0
+Author: Erick Lopez
+Author URI: https://ucondieresis.com
+License: GPL v2 or later
+*/
+
+// Enqueue styles and scripts
+function ucondieresis_enqueue_assets() {
+    wp_enqueue_style('theme-style', get_stylesheet_uri());
+}
+add_action('wp_enqueue_scripts', 'ucondieresis_enqueue_assets');
