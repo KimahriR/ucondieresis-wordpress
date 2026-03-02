@@ -42,9 +42,9 @@ function ucondieresis_enqueue_assets() {
     if (is_front_page()) {
         wp_enqueue_style(
             'ucondieresis-home',
-            UCONDIERESIS_URI . '/assets/css/home.css',
-            array('ucondieresis-style'),
-            UCONDIERESIS_VERSION
+            get_template_directory_uri() . '/assets/css/home.css',
+            array(),
+            filemtime(get_template_directory() . '/assets/css/home.css')
         );
     }
     
