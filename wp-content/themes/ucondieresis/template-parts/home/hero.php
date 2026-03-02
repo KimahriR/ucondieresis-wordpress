@@ -14,10 +14,10 @@ $whatsapp_url = 'https://wa.me/' . $whatsapp_number_clean . '?text=' . $whatsapp
 <section class="hero">
   <div class="hero__content">
     <h1 class="hero__title">
-      <?php esc_html_e('Encuentra el modelo perfecto para ti', 'ucondieresis'); ?>
+      <?php esc_html_e('Descubre nuestros modelos disponibles', 'ucondieresis'); ?>
     </h1>
     <p class="hero__subtitle">
-      <?php esc_html_e('Explora nuestro catálogo y solicita precios o información directamente por WhatsApp.', 'ucondieresis'); ?>
+      <?php esc_html_e('Solicita catálogo actualizado por WhatsApp.', 'ucondieresis'); ?>
     </p>
     
     <div class="hero__buttons">
