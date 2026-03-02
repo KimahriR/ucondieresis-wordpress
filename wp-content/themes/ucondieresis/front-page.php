@@ -14,6 +14,7 @@ get_header();
     <?php get_template_part('template-parts/home/hero'); ?>
     <?php get_template_part('template-parts/home/occasions'); ?>
     <?php get_template_part('template-parts/home/featured'); ?>
+    <?php get_template_part('template-parts/home/presentation'); ?>
     <?php get_template_part('template-parts/home/how-to-buy'); ?>
     <?php get_template_part('template-parts/home/cta'); ?>
 </main>

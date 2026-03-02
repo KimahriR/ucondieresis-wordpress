@@ -9,7 +9,7 @@
 <section class="featured">
   <div class="featured__container">
     <h2 class="featured__title">
-      <?php esc_html_e('Nuestros Productos Destacados', 'ucondieresis'); ?>
+      <?php esc_html_e('De tu idea a algo que se pueda abrazar', 'ucondieresis'); ?>
     </h2>
 
     <div class="featured__grid">
