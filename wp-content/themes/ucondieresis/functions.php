@@ -38,6 +38,16 @@ function ucondieresis_enqueue_assets() {
         UCONDIERESIS_VERSION
     );
     
+    // CSS para home page
+    if (is_front_page()) {
+        wp_enqueue_style(
+            'ucondieresis-home',
+            UCONDIERESIS_URI . '/assets/css/home.css',
+            array('ucondieresis-style'),
+            UCONDIERESIS_VERSION
+        );
+    }
+    
     // JS
     wp_enqueue_script(
         'ucondieresis-script',
