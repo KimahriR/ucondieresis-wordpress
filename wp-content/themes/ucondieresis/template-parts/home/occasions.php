@@ -5,7 +5,11 @@
  * @package Ucondieresis
  */
 
-$whatsapp_number = ucondieresis_get_whatsapp_number();
+// Get WhatsApp number safely
+$whatsapp_number = function_exists('ucondieresis_get_whatsapp_number') 
+    ? ucondieresis_get_whatsapp_number() 
+    : get_option('ucondieresis_whatsapp_numero', '+34 600 123 456');
+
 $whatsapp_number_clean = preg_replace('/\D/', '', $whatsapp_number);
 
 // Ocasiones con mensajes contextuales
