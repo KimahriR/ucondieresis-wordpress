@@ -16,6 +16,7 @@ get_header();
     if (is_front_page()) {
         // Show modular home components for front page
         get_template_part('template-parts/home/hero');
+        get_template_part('template-parts/home/occasions');
         get_template_part('template-parts/home/featured');
         get_template_part('template-parts/home/how-to-buy');
         get_template_part('template-parts/home/cta');

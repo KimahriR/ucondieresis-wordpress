@@ -70,6 +70,69 @@
 }
 
 /* ============================================
+   Occasions Section
+   ============================================ */
+.occasions {
+  padding: 80px 20px;
+  background: white;
+}
+
+.occasions__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.occasions__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.occasions__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.occasion-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 150px;
+}
+
+.occasion-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+}
+
+.occasion-card__icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.occasion-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ============================================
    Featured Products Section
    ============================================ */
 .featured {
