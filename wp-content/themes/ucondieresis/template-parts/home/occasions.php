@@ -142,12 +142,19 @@ $whatsapp_number_clean = preg_replace('/\D/', '', $whatsapp_number);
         
         <?php 
         $seasonal = array(
-            array('emoji' => '💘', 'name' => 'San Valentín', 'phrase' => 'Regalos que enamoran.', 'text' => 'Hola 🎉 quiero un regalo personalizado para San Valentín.'),
-            array('emoji' => '🌷', 'name' => 'Día de Madres', 'phrase' => 'Gracias por todo, mamá.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día de Madres.'),
-            array('emoji' => '👔', 'name' => 'Día del Padre', 'phrase' => 'Detalles con carácter.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día del Padre.'),
-            array('emoji' => '🎓', 'name' => 'Graduaciones', 'phrase' => 'Logros que se celebran.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Graduaciones.'),
-            array('emoji' => '🎄', 'name' => 'Navidad', 'phrase' => 'Regalos con intención.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Navidad.'),
-            array('emoji' => '🎃', 'name' => 'Halloween/Día de Muertos', 'phrase' => 'Detalles llenos de tradición.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Halloween/Día de Muertos.'),
+            array('emoji' => '💘', 'name' => 'San Valentín', 'phrase' => 'Regalos que enamoran.', 'text' => 'Hola 🎉 quiero un regalo personalizado para San Valentín, me interesa el catálogo.'),
+            array('emoji' => '👩‍⚕️', 'name' => 'Día de la Enfermera', 'phrase' => 'Gracias por cuidar.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día de la Enfermera, me interesa el catálogo.'),
+            array('emoji' => '🌷', 'name' => 'Día de la Mujer', 'phrase' => 'Detalles que inspiran.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día de la Mujer, me interesa el catálogo.'),
+            array('emoji' => '🐰', 'name' => 'Pascua', 'phrase' => 'Momentos dulces.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Pascua, me interesa el catálogo.'),
+            array('emoji' => '🧒', 'name' => 'Día del Niño', 'phrase' => 'Sorpresas que alegran.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día del Niño, me interesa el catálogo.'),
+            array('emoji' => '🌸', 'name' => 'Día de Madres', 'phrase' => 'Gracias por todo, mamá.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día de Madres, me interesa el catálogo.'),
+            array('emoji' => '👨', 'name' => 'Día del Padre', 'phrase' => 'Detalles con carácter.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día del Padre, me interesa el catálogo.'),
+            array('emoji' => '👩‍🏫', 'name' => 'Día del Maestro', 'phrase' => 'Reconocimiento especial.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día del Maestro, me interesa el catálogo.'),
+            array('emoji' => '🎓', 'name' => 'Graduaciones', 'phrase' => 'Logros que se celebran.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Graduaciones, me interesa el catálogo.'),
+            array('emoji' => '🎒', 'name' => 'Back to School', 'phrase' => 'Nuevos comienzos.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Back to School, me interesa el catálogo.'),
+            array('emoji' => '🇲🇽', 'name' => 'Independencia', 'phrase' => 'Detalles con orgullo.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Día de la Independencia, me interesa el catálogo.'),
+            array('emoji' => '🎃', 'name' => 'Halloween/Día Muertos', 'phrase' => 'Tradición celebrada.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Halloween/Día de Muertos, me interesa el catálogo.'),
+            array('emoji' => '🎄', 'name' => 'Navidad', 'phrase' => 'Regalos con intención.', 'text' => 'Hola 🎉 quiero un regalo personalizado para Navidad, me interesa el catálogo.'),
         );
         
         foreach ($seasonal as $item) {
