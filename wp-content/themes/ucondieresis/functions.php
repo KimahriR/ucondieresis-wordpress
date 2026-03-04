@@ -48,6 +48,15 @@ function ucondieresis_enqueue_assets() {
         );
     }
     
+    // JS - Floating WhatsApp Button (en todas las páginas)
+    wp_enqueue_script(
+        'ucondieresis-floating-whatsapp',
+        get_template_directory_uri() . '/assets/js/floating-whatsapp.js',
+        array(),
+        filemtime(get_template_directory() . '/assets/js/floating-whatsapp.js'),
+        true
+    );
+    
     // JS
     wp_enqueue_script(
         'ucondieresis-script',
