@@ -31,24 +31,8 @@ $productos_url = get_post_type_archive_link('productos');
          rel="noopener noreferrer"
          title="<?php esc_attr_e('Contactar por WhatsApp', 'ucondieresis'); ?>">
         <svg class="cta__whatsapp-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Pink rounded square background with gradient -->
-          <defs>
-            <linearGradient id="pinkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#FF4B8D;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#E91E63;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <rect x="0" y="0" width="24" height="24" rx="5.5" fill="url(#pinkGradient)"/>
-          
-          <!-- WhatsApp speech bubble with phone receiver -->
-          <g transform="translate(3.5, 2.5)">
-            <!-- Chat bubble -->
-            <path d="M2 0H13C14.1 0 15 0.9 15 2V11C15 12.1 14.1 13 13 13H7.5L3.5 16V13H2C0.9 13 0 12.1 0 11V2C0 0.9 0.9 0 2 0Z" fill="white"/>
-            <!-- Phone handset -->
-            <g transform="translate(3.5, 3)">
-              <path d="M3.5 0C4.9 0 6 1.1 6 2.5C6 4.7 4.7 6.5 2.5 7.9C1.7 8.4 0.5 8.4 0 7.9C-1.2 6.5 -2.5 4.7 -2.5 2.5C-2.5 1.1 -1.4 0 0 0L3.5 0Z" fill="#E91E63"/>
-            </g>
-          </g>
+          <circle cx="12" cy="12" r="11" fill="#E94B8A" fill-rule="evenodd"/>
+          <path d="M10.64,17.59 C11.67,18.62 13.06,19.56 14.62,20.23 L15.99,20.23 C16.54,20.23 16.99,19.78 16.99,19.23 L16.99,16.76 C16.99,16.21 16.54,15.76 15.99,15.76 L14.62,15.76 C13.06,16.43 11.67,17.37 10.64,18.4 L10.64,15.93 C10.64,15.38 10.19,14.93 9.64,14.93 C9.09,14.93 8.64,15.38 8.64,15.93 L8.64,18.4 C8.64,18.95 9.09,19.4 9.64,19.4 L12.11,19.4 C12.66,19.4 13.11,18.95 13.11,18.4 C13.11,17.85 12.66,17.4 12.11,17.4 L10.64,17.4 L10.64,17.59 Z" fill="white"/>
         </svg>
       </a>
     </div>
