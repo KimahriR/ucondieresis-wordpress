@@ -5,10 +5,7 @@
  * @package Ucondieresis
  */
 
-$whatsapp_number = ucondieresis_get_whatsapp_number();
-$whatsapp_number_clean = preg_replace('/\D/', '', $whatsapp_number);
-$whatsapp_message = urlencode(__('Hola, quisiera más información sobre sus productos', 'ucondieresis'));
-$whatsapp_url = 'https://wa.me/' . $whatsapp_number_clean . '?text=' . $whatsapp_message;
+$productos_url = get_post_type_archive_link('productos');
 ?>
 
 <section class="cta-section">
@@ -20,14 +17,16 @@ $whatsapp_url = 'https://wa.me/' . $whatsapp_number_clean . '?text=' . $whatsapp
       <?php esc_html_e('Contáctanos hoy y te enviaremos nuestro catálogo completo con precios y disponibilidad.', 'ucondieresis'); ?>
     </p>
 
+    <!-- Floating WhatsApp Button Integration Point -->
+    <div class="cta__whatsapp-focus" id="cta-whatsapp-focus">
+      <div class="cta__whatsapp-visual">
+        <span class="cta__whatsapp-icon">💬</span>
+        <p class="cta__whatsapp-text"><?php esc_html_e('¿Vamos a crear algo juntos?', 'ucondieresis'); ?></p>
+      </div>
+    </div>
+
     <div class="cta__buttons">
-      <a href="<?php echo esc_url($whatsapp_url); ?>" 
-         class="btn btn--whatsapp" 
-         target="_blank" 
-         rel="noopener noreferrer">
-        <?php esc_html_e('Escríbenos por WhatsApp', 'ucondieresis'); ?>
-      </a>
-      <a href="<?php echo esc_url(get_post_type_archive_link('productos')); ?>" 
+      <a href="<?php echo esc_url($productos_url); ?>" 
          class="btn btn--secondary">
         <?php esc_html_e('Ver todos los modelos', 'ucondieresis'); ?>
       </a>

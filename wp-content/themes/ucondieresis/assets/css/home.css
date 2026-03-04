@@ -337,12 +337,71 @@
   line-height: 1.6;
 }
 
+/* WhatsApp Focus Point - Visual Integration */
+.cta__whatsapp-focus {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  animation: whatsapp-focus-pulse 3s ease-in-out infinite;
+}
+
+.cta__whatsapp-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.cta__whatsapp-focus:hover .cta__whatsapp-visual {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.cta__whatsapp-icon {
+  font-size: 60px;
+  display: block;
+  animation: whatsapp-icon-bounce 2s ease-in-out infinite;
+}
+
+.cta__whatsapp-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* Animations */
+@keyframes whatsapp-focus-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes whatsapp-icon-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .cta__buttons {
   display: flex;
   flex-direction: column;
   gap: 15px;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
 }
 
@@ -460,6 +519,18 @@
 
   .btn {
     width: 100%;
+  }
+
+  .cta__whatsapp-visual {
+    padding: 20px;
+  }
+
+  .cta__whatsapp-icon {
+    font-size: 45px;
+  }
+
+  .cta__whatsapp-text {
+    font-size: 0.95rem;
   }
 }
 
