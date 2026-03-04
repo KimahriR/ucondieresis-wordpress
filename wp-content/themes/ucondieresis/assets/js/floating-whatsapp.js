@@ -3,7 +3,7 @@
  * 
  * Features:
  * - Rotating tooltip messages (emoji + plain + conversion soft)
- * - Expandable bubble menu with arc animation
+ * - Bottom sheet modal (slides up diagonally)
  * - Smart show/hide logic (initial, scroll, time-based)
  * - Session-based appearance tracking
  * 
@@ -23,17 +23,14 @@
     initialDelay: 0,
     secondTooltipDelay: 25000,
     maxTooltipAppearances: 3,
-    animationDuration: 300,
-    menuAnimationDuration: 400,
   };
 
   const state = {
-    menuOpen: false,
+    sheetOpen: false,
     tooltipShown: 0,
     scrollTriggerFired: false,
     lastMessageIndex: -1,
     tooltipTimers: [],
-    isAnimating: false,
   };
 
   // ==========================================
@@ -63,13 +60,14 @@
 
   const container = document.getElementById('whatsapp-floating-container');
   const mainBtn = document.getElementById('whatsapp-main-btn');
+  const sheet = document.getElementById('whatsapp-sheet');
+  const backdrop = document.getElementById('whatsapp-backdrop') || sheet?.querySelector('.whatsapp-sheet__backdrop');
   const tooltip = document.getElementById('whatsapp-tooltip');
   const tooltipText = document.getElementById('tooltip-text');
-  const menu = document.getElementById('whatsapp-menu');
-  const menuItems = document.querySelectorAll('.whatsapp-menu__item');
+  const sheetOptions = document.querySelectorAll('.whatsapp-sheet__option');
 
   // Guard clause: stop if elements not found
-  if (!container || !mainBtn || !menu) {
+  if (!container || !mainBtn || !sheet) {
     return;
   }
 
@@ -118,10 +116,10 @@
    * @param {number} duration Auto-hide after duration (ms)
    */
   function showTooltip(duration = CONFIG.tooltipDuration) {
-    // Don't show if max appearances reached or menu is open
+    // Don't show if max appearances reached or sheet is open
     if (
       state.tooltipShown >= CONFIG.maxTooltipAppearances ||
-      state.menuOpen
+      state.sheetOpen
     ) {
       return;
     }
@@ -160,68 +158,125 @@
   }
 
   // ==========================================
-  // Menu Positioning (Arc Layout)
+  // Sheet Modal Management
   // ==========================================
 
   /**
-   * Position menu items in arc formation above button
-   * Uses CSS custom properties for positioning
+   * Open bottom sheet modal
    */
-  function positionMenuItems() {
-    const radius = 70;
-    const startAngle = 180; // Top (changed from 90)
-    const angleSpan = 120; // 120 degree arc (was 180)
-    const itemCount = menuItems.length;
+  function openSheet() {
+    if (state.sheetOpen) return;
 
-    menuItems.forEach((item, index) => {
-      // Spread items in upward arc
-      const angle = startAngle - (angleSpan / 2) + (angleSpan / (itemCount - 1)) * index;
-      const rad = (angle * Math.PI) / 180;
+    state.sheetOpen = true;
+    hideTooltip();
+    mainBtn.setAttribute('aria-expanded', 'true');
+    sheet.classList.add('is-open');
 
-      const x = Math.cos(rad) * radius;
-      const y = Math.sin(rad) * radius;
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
 
-      item.style.setProperty('--item-x', `${x}px`);
-      item.style.setProperty('--item-y', `${y}px`);
-    });
+  /**
+   * Close bottom sheet modal
+   */
+  function closeSheet() {
+    if (!state.sheetOpen) return;
+
+    state.sheetOpen = false;
+    mainBtn.setAttribute('aria-expanded', 'false');
+    sheet.classList.remove('is-open');
+
+    // Restore body scroll
+    document.body.style.overflow = '';
   }
 
   // ==========================================
-  // Menu Toggle
+  // Event Listeners
   // ==========================================
 
   /**
-   * Toggle menu open/closed with animation
+   * Main button click - toggle sheet
    */
-  function toggleMenu() {
-    if (state.isAnimating) return;
-
-    state.isAnimating = true;
-    state.menuOpen = !state.menuOpen;
-
-    if (state.menuOpen) {
-      hideTooltip(); // Hide tooltip when menu opens
-      mainBtn.setAttribute('aria-expanded', 'true');
-
-      // Staggered expand animation
-      menuItems.forEach((item, index) => {
-        item.classList.add('is-expanded');
-        item.style.transitionDelay = `${index * 0.08}s`;
-      });
+  mainBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (state.sheetOpen) {
+      closeSheet();
     } else {
-      mainBtn.setAttribute('aria-expanded', 'false');
-
-      // Reverse staggered collapse animation
-      menuItems.forEach((item, index) => {
-        item.classList.remove('is-expanded');
-        item.style.transitionDelay = `${(menuItems.length - 1 - index) * 0.06}s`;
-      });
+      openSheet();
     }
+  });
 
-    setTimeout(() => {
-      state.isAnimating = false;
-    }, CONFIG.menuAnimationDuration);
-  }
+  /**
+   * Close sheet when clicking backdrop
+   */
+  backdrop.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeSheet();
+  });
+
+  /**
+   * Close sheet when clicking outside
+   */
+  document.addEventListener('click', (e) => {
+    if (state.sheetOpen && !sheet.contains(e.target) && !mainBtn.contains(e.target)) {
+      closeSheet();
+    }
+  });
+
+  /**
+   * Sheet option click - generate WhatsApp link and redirect
+   */
+  sheetOptions.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const message = item.getAttribute('data-message');
+      const whatsappNumber = item.getAttribute('data-whatsapp');
+
+      if (message && whatsappNumber) {
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+        // Close sheet before redirecting
+        closeSheet();
+
+        // Small delay to allow animation
+        setTimeout(() => {
+          window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }, 200);
+      }
+    });
+  });
+
+  /**
+   * Close sheet on ESC key
+   */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && state.sheetOpen) {
+      closeSheet();
+    }
+  });
+
+  /**
+   * Scroll trigger - show tooltip again at 50% scroll
+   */
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (state.scrollTriggerFired || state.sheetOpen) return;
+
+      const scrollPercent =
+        (window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight)) *
+        100;
+
+      if (scrollPercent >= CONFIG.scrollTriggerPercent) {
+        state.scrollTriggerFired = true;
+        showTooltip(CONFIG.tooltipDuration);
+      }
+    },
+    { passive: true }
+  );
 
   // ==========================================
   // Load Configuration from JSON
@@ -242,7 +297,7 @@
       }
 
       // Store WhatsApp number and messages in data attribute for JS access
-      menuItems.forEach((item) => {
+      sheetOptions.forEach((item) => {
         const action = item.getAttribute('data-action');
         if (action && config.messages && config.messages[action]) {
           item.setAttribute(
@@ -261,74 +316,6 @@
   }
 
   // ==========================================
-  // Event Listeners
-  // ==========================================
-
-  /**
-   * Main button click - toggle menu
-   */
-  mainBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    toggleMenu();
-  });
-
-  /**
-   * Close menu when clicking outside
-   */
-  document.addEventListener('click', (e) => {
-    if (!container.contains(e.target) && state.menuOpen) {
-      toggleMenu();
-    }
-  });
-
-  /**
-   * Menu item click - generate WhatsApp link and redirect
-   */
-  menuItems.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      const message = item.getAttribute('data-message');
-      const whatsappNumber = item.getAttribute('data-whatsapp');
-
-      if (message && whatsappNumber) {
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-        // Close menu before redirecting
-        setTimeout(() => {
-          if (state.menuOpen) {
-            toggleMenu();
-          }
-          // Navigate to WhatsApp
-          window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-        }, 100);
-      }
-    });
-  });
-
-  /**
-   * Scroll trigger - show tooltip again at 50% scroll
-   */
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (state.scrollTriggerFired || state.menuOpen) return;
-
-      const scrollPercent =
-        (window.scrollY /
-          (document.documentElement.scrollHeight - window.innerHeight)) *
-        100;
-
-      if (scrollPercent >= CONFIG.scrollTriggerPercent) {
-        state.scrollTriggerFired = true;
-        showTooltip(CONFIG.tooltipDuration);
-      }
-    },
-    { passive: true }
-  );
-
-  // ==========================================
   // Initialize
   // ==========================================
 
@@ -339,9 +326,6 @@
     // Load messages from JSON config
     loadConfigFromJSON();
 
-    // Position menu items in arc
-    positionMenuItems();
-
     // Initial tooltip after delay
     const showInitialTooltip = setTimeout(() => {
       showTooltip(CONFIG.tooltipDuration);
@@ -350,7 +334,7 @@
       const secondTooltipTimer = setTimeout(() => {
         if (
           state.tooltipShown < CONFIG.maxTooltipAppearances &&
-          !state.menuOpen &&
+          !state.sheetOpen &&
           !state.scrollTriggerFired
         ) {
           showTooltip(CONFIG.tooltipDuration);
@@ -372,6 +356,9 @@
    */
   window.addEventListener('beforeunload', () => {
     clearTooltipTimers();
+    if (state.sheetOpen) {
+      closeSheet();
+    }
   });
 
   // ==========================================
