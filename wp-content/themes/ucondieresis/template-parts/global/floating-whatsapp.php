@@ -35,7 +35,26 @@ use Ucondieresis\WhatsApp_Utils;
     aria-label="<?php esc_attr_e('Abrir menú de WhatsApp', 'ucondieresis'); ?>"
     aria-controls="whatsapp-menu"
     aria-expanded="false">
-    <span class="whatsapp-floating-button__icon">💬</span>
+    <svg class="whatsapp-floating-button__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Pink rounded square background with gradient -->
+      <defs>
+        <linearGradient id="floatingPinkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#FF4B8D;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#E91E63;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="24" height="24" rx="5.5" fill="url(#floatingPinkGradient)"/>
+      
+      <!-- WhatsApp speech bubble with phone receiver -->
+      <g transform="translate(3.5, 2.5)">
+        <!-- Chat bubble -->
+        <path d="M2 0H13C14.1 0 15 0.9 15 2V11C15 12.1 14.1 13 13 13H7.5L3.5 16V13H2C0.9 13 0 12.1 0 11V2C0 0.9 0.9 0 2 0Z" fill="white"/>
+        <!-- Phone handset -->
+        <g transform="translate(3.5, 3)">
+          <path d="M3.5 0C4.9 0 6 1.1 6 2.5C6 4.7 4.7 6.5 2.5 7.9C1.7 8.4 0.5 8.4 0 7.9C-1.2 6.5 -2.5 4.7 -2.5 2.5C-2.5 1.1 -1.4 0 0 0L3.5 0Z" fill="#E91E63"/>
+        </g>
+      </g>
+    </svg>
   </button>
 
   <!-- Floating Menu Bubbles -->
