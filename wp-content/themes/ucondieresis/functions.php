@@ -46,6 +46,15 @@ function ucondieresis_enqueue_assets() {
             array(),
             filemtime(get_template_directory() . '/assets/css/home.css')
         );
+        
+        // JS para carrusel de inspiraciones
+        wp_enqueue_script(
+            'ucondieresis-inspiracion-carousel',
+            get_template_directory_uri() . '/assets/js/inspiracion-carousel.js',
+            array(),
+            filemtime(get_template_directory() . '/assets/js/inspiracion-carousel.js'),
+            true
+        );
     }
     
     // JS - Floating WhatsApp Button (en todas las páginas)

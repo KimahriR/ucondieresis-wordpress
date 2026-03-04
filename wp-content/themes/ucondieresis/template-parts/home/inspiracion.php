@@ -41,56 +41,76 @@ if (!$inspirations_query->have_posts()) {
             </p>
         </header>
 
-        <div class="inspiracion-grid">
-            <?php while ($inspirations_query->have_posts()) : $inspirations_query->the_post();
-                $url_externa = get_post_meta(get_the_ID(), '_url_externa', true);
-                $plataforma = get_post_meta(get_the_ID(), '_plataforma', true);
-                $has_image = has_post_thumbnail();
-                $image_url = $has_image ? get_the_post_thumbnail_url(get_the_ID(), 'large') : '';
-                ?>
+        <div class="inspiracion-carousel-wrapper">
+            <div class="inspiracion-grid" id="inspiracion-carousel">
+                <?php while ($inspirations_query->have_posts()) : $inspirations_query->the_post();
+                    $url_externa = get_post_meta(get_the_ID(), '_url_externa', true);
+                    $plataforma = get_post_meta(get_the_ID(), '_plataforma', true);
+                    $has_image = has_post_thumbnail();
+                    $image_url = $has_image ? get_the_post_thumbnail_url(get_the_ID(), 'large') : '';
+                    ?>
 
-                <article class="inspiracion-card">
-                    <?php if ($has_image && $image_url) : ?>
-                        <div class="inspiracion-card__image-wrapper">
-                            <img 
-                                src="<?php echo esc_url($image_url); ?>" 
-                                alt="<?php the_title_attribute(); ?>" 
-                                class="inspiracion-card__image"
-                                loading="lazy"
-                                width="220"
-                                height="220"
-                            />
-                            
-                            <?php if ($plataforma && $url_externa) : 
-                                $platform_label = ('instagram' === $plataforma) ? 'Instagram' : 'TikTok';
-                                $platform_icon = ('instagram' === $plataforma) ? '📷' : '🎵';
-                                ?>
-                                <div class="inspiracion-card__overlay">
-                                    <a 
-                                        href="<?php echo esc_url($url_externa); ?>" 
-                                        class="inspiracion-card__link"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label="<?php printf(esc_attr__('Ver en %s - %s', 'ucondieresis'), $platform_label, the_title_attribute(['echo' => 0])); ?>"
-                                    >
-                                        <span class="inspiracion-card__badge">
-                                            <span class="badge-icon"><?php echo esc_html($platform_icon); ?></span>
-                                            <span class="badge-text"><?php echo esc_html($platform_label); ?></span>
-                                        </span>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
+                    <article class="inspiracion-card">
+                        <?php if ($has_image && $image_url) : ?>
+                            <div class="inspiracion-card__image-wrapper">
+                                <img 
+                                    src="<?php echo esc_url($image_url); ?>" 
+                                    alt="<?php the_title_attribute(); ?>" 
+                                    class="inspiracion-card__image"
+                                    loading="lazy"
+                                    width="220"
+                                    height="220"
+                                />
+                                
+                                <?php if ($plataforma && $url_externa) : 
+                                    $platform_label = ('instagram' === $plataforma) ? 'Instagram' : 'TikTok';
+                                    $platform_icon = ('instagram' === $plataforma) ? '📷' : '🎵';
+                                    ?>
+                                    <div class="inspiracion-card__overlay">
+                                        <a 
+                                            href="<?php echo esc_url($url_externa); ?>" 
+                                            class="inspiracion-card__link"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label="<?php printf(esc_attr__('Ver en %s - %s', 'ucondieresis'), $platform_label, the_title_attribute(['echo' => 0])); ?>"
+                                        >
+                                            <span class="inspiracion-card__badge">
+                                                <span class="badge-icon"><?php echo esc_html($platform_icon); ?></span>
+                                                <span class="badge-text"><?php echo esc_html($platform_label); ?></span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <div class="inspiracion-card__content">
+                            <h3 class="inspiracion-card__title">
+                                <?php the_title(); ?>
+                            </h3>
                         </div>
-                    <?php endif; ?>
+                    </article>
 
-                    <div class="inspiracion-card__content">
-                        <h3 class="inspiracion-card__title">
-                            <?php the_title(); ?>
-                        </h3>
-                    </div>
-                </article>
+                <?php endwhile; ?>
+            </div>
 
-            <?php endwhile; ?>
+            <!-- Botones de Navegación del Carrusel -->
+            <div class="inspiracion-carousel-nav">
+                <button 
+                    class="inspiracion-carousel-btn inspiracion-carousel-btn--prev" 
+                    id="inspiracion-prev"
+                    aria-label="<?php esc_attr_e('Slide anterior', 'ucondieresis'); ?>"
+                >
+                    &#8249;
+                </button>
+                <button 
+                    class="inspiracion-carousel-btn inspiracion-carousel-btn--next" 
+                    id="inspiracion-next"
+                    aria-label="<?php esc_attr_e('Siguiente slide', 'ucondieresis'); ?>"
+                >
+                    &#8250;
+                </button>
+            </div>
         </div>
     </div>
 </section>
