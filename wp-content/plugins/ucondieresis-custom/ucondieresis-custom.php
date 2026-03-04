@@ -82,6 +82,7 @@ class Plugin {
         
         // Cargar clases
         require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-cpt-productos.php';
+        require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-cpt-inspiraciones.php';
         require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-taxonomies.php';
         require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-whatsapp-utils.php';
         
@@ -113,8 +114,9 @@ class Plugin {
      * @return void
      */
     public function on_activation() {
-        // Registrar CPT
+        // Registrar CPTs
         CPT_Productos::register();
+        CPT_Inspiraciones::register();
         Taxonomies::register();
         
         // Flush rewrite rules
@@ -136,8 +138,9 @@ class Plugin {
      * @return void
      */
     public function on_init() {
-        // Registrar CPT
+        // Registrar CPTs
         CPT_Productos::register();
+        CPT_Inspiraciones::register();
         
         // Registrar taxonomías
         Taxonomies::register();
