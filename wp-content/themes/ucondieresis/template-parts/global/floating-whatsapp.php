@@ -48,6 +48,7 @@ use Ucondieresis\WhatsApp_Utils;
       title="<?php esc_attr_e('Crear un regalo', 'ucondieresis'); ?>"
       aria-label="<?php esc_attr_e('Crear un regalo personalizado', 'ucondieresis'); ?>">
       <span class="whatsapp-menu__item-icon">💛</span>
+      <span class="whatsapp-menu__item-label"><?php esc_html_e('Crear regalo', 'ucondieresis'); ?></span>
     </button>
 
     <!-- Opción 2: Para negocio -->
@@ -57,6 +58,7 @@ use Ucondieresis\WhatsApp_Utils;
       title="<?php esc_attr_e('Para mi negocio', 'ucondieresis'); ?>"
       aria-label="<?php esc_attr_e('Cotizar productos personalizados', 'ucondieresis'); ?>">
       <span class="whatsapp-menu__item-icon">🚀</span>
+      <span class="whatsapp-menu__item-label"><?php esc_html_e('Para mi negocio', 'ucondieresis'); ?></span>
     </button>
 
     <!-- Opción 3: Mensaje rápido -->
@@ -66,6 +68,7 @@ use Ucondieresis\WhatsApp_Utils;
       title="<?php esc_attr_e('Mensaje rápido', 'ucondieresis'); ?>"
       aria-label="<?php esc_attr_e('Envía tu pregunta rápidamente', 'ucondieresis'); ?>">
       <span class="whatsapp-menu__item-icon">⚡</span>
+      <span class="whatsapp-menu__item-label"><?php esc_html_e('Mensaje rápido', 'ucondieresis'); ?></span>
     </button>
   </div>
 
