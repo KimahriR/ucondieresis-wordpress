@@ -33,86 +33,40 @@ use Ucondieresis\WhatsApp_Utils;
     id="whatsapp-main-btn" 
     class="whatsapp-floating-button"
     aria-label="<?php esc_attr_e('Abrir menú de WhatsApp', 'ucondieresis'); ?>"
-    aria-controls="whatsapp-sheet"
+    aria-controls="whatsapp-menu"
     aria-expanded="false">
     <span class="whatsapp-floating-button__icon">💬</span>
   </button>
 
-</div>
-
-<!-- Bottom Sheet Modal -->
-<div id="whatsapp-sheet" class="whatsapp-sheet" role="dialog" aria-labelledby="whatsapp-sheet-title" aria-modal="true">
-  
-  <!-- Backdrop (cierra al hacer clic) -->
-  <div id="whatsapp-backdrop" class="whatsapp-sheet__backdrop"></div>
-  
-  <!-- Contenido del sheet -->
-  <div class="whatsapp-sheet__content">
+  <!-- Floating Menu Bubbles -->
+  <div id="whatsapp-menu" class="whatsapp-menu" role="menu">
     
-    <div class="whatsapp-sheet__header">
-      <h2 id="whatsapp-sheet-title" class="whatsapp-sheet__title">
-        <?php esc_html_e('¿Cómo podemos ayudarte?', 'ucondieresis'); ?>
-      </h2>
-      <p class="whatsapp-sheet__subtitle">
-        <?php esc_html_e('Elige una opción para contactarnos por WhatsApp', 'ucondieresis'); ?>
-      </p>
-    </div>
+    <!-- Opción 1: Crear regalo -->
+    <button
+      class="whatsapp-menu__item whatsapp-menu__item--1"
+      data-action="gift"
+      title="<?php esc_attr_e('Crear un regalo', 'ucondieresis'); ?>"
+      aria-label="<?php esc_attr_e('Crear un regalo personalizado', 'ucondieresis'); ?>">
+      <span class="whatsapp-menu__item-icon">💛</span>
+    </button>
 
-    <div class="whatsapp-sheet__options">
-      
-      <!-- Opción 1: Crear regalo -->
-      <a 
-        href="#"
-        class="whatsapp-sheet__option"
-        data-action="gift">
-        <span class="whatsapp-sheet__option-icon">💛</span>
-        <div class="whatsapp-sheet__option-content">
-          <h3 class="whatsapp-sheet__option-title">
-            <?php esc_html_e('Crear un regalo', 'ucondieresis'); ?>
-          </h3>
-          <p class="whatsapp-sheet__option-desc">
-            <?php esc_html_e('Quiero un regalo personalizado', 'ucondieresis'); ?>
-          </p>
-        </div>
-        <span class="whatsapp-sheet__option-arrow">→</span>
-      </a>
+    <!-- Opción 2: Para negocio -->
+    <button
+      class="whatsapp-menu__item whatsapp-menu__item--2"
+      data-action="business"
+      title="<?php esc_attr_e('Para mi negocio', 'ucondieresis'); ?>"
+      aria-label="<?php esc_attr_e('Cotizar productos personalizados', 'ucondieresis'); ?>">
+      <span class="whatsapp-menu__item-icon">🚀</span>
+    </button>
 
-      <!-- Opción 2: Para negocio -->
-      <a 
-        href="#"
-        class="whatsapp-sheet__option"
-        data-action="business">
-        <span class="whatsapp-sheet__option-icon">🚀</span>
-        <div class="whatsapp-sheet__option-content">
-          <h3 class="whatsapp-sheet__option-title">
-            <?php esc_html_e('Para mi negocio', 'ucondieresis'); ?>
-          </h3>
-          <p class="whatsapp-sheet__option-desc">
-            <?php esc_html_e('Cotizar productos personalizados', 'ucondieresis'); ?>
-          </p>
-        </div>
-        <span class="whatsapp-sheet__option-arrow">→</span>
-      </a>
-
-      <!-- Opción 3: Mensaje rápido -->
-      <a 
-        href="#"
-        class="whatsapp-sheet__option"
-        data-action="quick">
-        <span class="whatsapp-sheet__option-icon">⚡</span>
-        <div class="whatsapp-sheet__option-content">
-          <h3 class="whatsapp-sheet__option-title">
-            <?php esc_html_e('Mensaje rápido', 'ucondieresis'); ?>
-          </h3>
-          <p class="whatsapp-sheet__option-desc">
-            <?php esc_html_e('Tengo una consulta', 'ucondieresis'); ?>
-          </p>
-        </div>
-        <span class="whatsapp-sheet__option-arrow">→</span>
-      </a>
-
-    </div>
-
+    <!-- Opción 3: Mensaje rápido -->
+    <button
+      class="whatsapp-menu__item whatsapp-menu__item--3"
+      data-action="quick"
+      title="<?php esc_attr_e('Mensaje rápido', 'ucondieresis'); ?>"
+      aria-label="<?php esc_attr_e('Envía tu pregunta rápidamente', 'ucondieresis'); ?>">
+      <span class="whatsapp-menu__item-icon">⚡</span>
+    </button>
   </div>
 
 </div>

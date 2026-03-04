@@ -544,139 +544,69 @@
   display: inline-block;
 }
 
-/* Menú Bottom Sheet Modal */
-.whatsapp-sheet {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 998;
-  display: flex;
-  align-items: flex-end;
-  pointer-events: none;
-  opacity: 0;
-  animation: whatsapp-sheet-exit 0.4s ease forwards;
-}
-
-.whatsapp-sheet.is-open {
-  pointer-events: auto;
-  opacity: 1;
-  animation: whatsapp-sheet-enter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.whatsapp-sheet__backdrop {
+/* Menú Flotante Minimalista */
+.whatsapp-menu {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.3s ease;
-}
-
-.whatsapp-sheet.is-open .whatsapp-sheet__backdrop {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.whatsapp-sheet__content {
-  position: relative;
-  width: 100%;
-  max-height: 70vh;
-  background: white;
-  border-radius: 20px 20px 0 0;
-  padding: 30px 20px 40px;
-  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
-  overflow-y: auto;
-  animation: whatsapp-sheet-slide-up 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.whatsapp-sheet__header {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.whatsapp-sheet__title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #333;
-  margin: 0 0 8px 0;
-}
-
-.whatsapp-sheet__subtitle {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0;
-}
-
-.whatsapp-sheet__options {
+  right: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  align-items: flex-end;
+  pointer-events: none;
 }
 
-.whatsapp-sheet__option {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 16px 20px;
-  background: #f9f9f9;
-  border: 2px solid #f0f0f0;
-  border-radius: 12px;
-  text-decoration: none;
-  color: #333;
-  transition: all 0.3s ease;
+.whatsapp-menu__item {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: inherit;
   cursor: pointer;
-}
-
-.whatsapp-sheet__option:hover {
-  background: #f0f0f0;
-  border-color: #667eea;
-  transform: translateX(4px);
-}
-
-.whatsapp-sheet__option:active {
-  transform: translateX(2px);
-}
-
-.whatsapp-sheet__option-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 20px;
+  opacity: 0;
+  transform: translateY(20px) scale(0.7);
+  pointer-events: none;
 }
 
-.whatsapp-sheet__option-content {
-  flex: 1;
-  min-width: 0;
+.whatsapp-menu__item-icon {
+  display: block;
+  line-height: 1;
 }
 
-.whatsapp-sheet__option-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0 0 4px 0;
+.whatsapp-menu__item:hover {
+  transform: translateY(20px) scale(0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.whatsapp-sheet__option-desc {
-  font-size: 0.85rem;
-  color: #999;
-  margin: 0;
+/* Staggered expansion */
+.whatsapp-menu__item--1.is-expanded {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  transition-delay: 0.05s;
 }
 
-.whatsapp-sheet__option-arrow {
-  font-size: 1.2rem;
-  color: #667eea;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
+.whatsapp-menu__item--2.is-expanded {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  transition-delay: 0.1s;
 }
 
-.whatsapp-sheet__option:hover .whatsapp-sheet__option-arrow {
-  transform: translateX(4px);
+.whatsapp-menu__item--3.is-expanded {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  transition-delay: 0.15s;
 }
 
-/* Animaciones */
 @keyframes whatsapp-button-enter {
   from {
     opacity: 0;
@@ -707,33 +637,6 @@
   to {
     opacity: 0;
     transform: translateX(20px) translateY(0);
-  }
-}
-
-@keyframes whatsapp-sheet-enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes whatsapp-sheet-exit {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes whatsapp-sheet-slide-up {
-  from {
-    transform: translateY(100%) translateX(40px);
-  }
-  to {
-    transform: translateY(0) translateX(0);
   }
 }
 

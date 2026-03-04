@@ -23,14 +23,17 @@
     initialDelay: 0,
     secondTooltipDelay: 25000,
     maxTooltipAppearances: 3,
+    animationDuration: 300,
+    menuAnimationDuration: 400,
   };
 
   const state = {
-    sheetOpen: false,
+    menuOpen: false,
     tooltipShown: 0,
     scrollTriggerFired: false,
     lastMessageIndex: -1,
     tooltipTimers: [],
+    isAnimating: false,
   };
 
   // ==========================================
@@ -60,14 +63,13 @@
 
   const container = document.getElementById('whatsapp-floating-container');
   const mainBtn = document.getElementById('whatsapp-main-btn');
-  const sheet = document.getElementById('whatsapp-sheet');
-  const backdrop = document.getElementById('whatsapp-backdrop') || sheet?.querySelector('.whatsapp-sheet__backdrop');
   const tooltip = document.getElementById('whatsapp-tooltip');
   const tooltipText = document.getElementById('tooltip-text');
-  const sheetOptions = document.querySelectorAll('.whatsapp-sheet__option');
+  const menu = document.getElementById('whatsapp-menu');
+  const menuItems = document.querySelectorAll('.whatsapp-menu__item');
 
   // Guard clause: stop if elements not found
-  if (!container || !mainBtn || !sheet) {
+  if (!container || !mainBtn || !menu) {
     return;
   }
 
@@ -116,10 +118,10 @@
    * @param {number} duration Auto-hide after duration (ms)
    */
   function showTooltip(duration = CONFIG.tooltipDuration) {
-    // Don't show if max appearances reached or sheet is open
+    // Don't show if max appearances reached or menu is open
     if (
       state.tooltipShown >= CONFIG.maxTooltipAppearances ||
-      state.sheetOpen
+      state.menuOpen
     ) {
       return;
     }
@@ -158,36 +160,40 @@
   }
 
   // ==========================================
-  // Sheet Modal Management
+  // Menu Toggle
   // ==========================================
 
   /**
-   * Open bottom sheet modal
+   * Toggle menu open/closed with animation
    */
-  function openSheet() {
-    if (state.sheetOpen) return;
+  function toggleMenu() {
+    if (state.isAnimating) return;
 
-    state.sheetOpen = true;
-    hideTooltip();
-    mainBtn.setAttribute('aria-expanded', 'true');
-    sheet.classList.add('is-open');
+    state.isAnimating = true;
+    state.menuOpen = !state.menuOpen;
 
-    // Prevent body scroll
-    document.body.style.overflow = 'hidden';
-  }
+    if (state.menuOpen) {
+      hideTooltip(); // Hide tooltip when menu opens
+      mainBtn.setAttribute('aria-expanded', 'true');
 
-  /**
-   * Close bottom sheet modal
-   */
-  function closeSheet() {
-    if (!state.sheetOpen) return;
+      // Staggered expand animation
+      menuItems.forEach((item, index) => {
+        item.classList.add('is-expanded');
+        item.style.transitionDelay = `${index * 0.08}s`;
+      });
+    } else {
+      mainBtn.setAttribute('aria-expanded', 'false');
 
-    state.sheetOpen = false;
-    mainBtn.setAttribute('aria-expanded', 'false');
-    sheet.classList.remove('is-open');
+      // Reverse staggered collapse animation
+      menuItems.forEach((item, index) => {
+        item.classList.remove('is-expanded');
+        item.style.transitionDelay = `${(menuItems.length - 1 - index) * 0.06}s`;
+      });
+    }
 
-    // Restore body scroll
-    document.body.style.overflow = '';
+    setTimeout(() => {
+      state.isAnimating = false;
+    }, CONFIG.menuAnimationDuration);
   }
 
   // ==========================================
@@ -195,38 +201,26 @@
   // ==========================================
 
   /**
-   * Main button click - toggle sheet
+   * Main button click - toggle menu
    */
   mainBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    if (state.sheetOpen) {
-      closeSheet();
-    } else {
-      openSheet();
-    }
+    toggleMenu();
   });
 
   /**
-   * Close sheet when clicking backdrop
-   */
-  backdrop.addEventListener('click', (e) => {
-    e.preventDefault();
-    closeSheet();
-  });
-
-  /**
-   * Close sheet when clicking outside
+   * Close menu when clicking outside
    */
   document.addEventListener('click', (e) => {
-    if (state.sheetOpen && !sheet.contains(e.target) && !mainBtn.contains(e.target)) {
-      closeSheet();
+    if (!container.contains(e.target) && state.menuOpen) {
+      toggleMenu();
     }
   });
 
   /**
-   * Sheet option click - generate WhatsApp link and redirect
+   * Menu item click - generate WhatsApp link and redirect
    */
-  sheetOptions.forEach((item) => {
+  menuItems.forEach((item) => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
 
@@ -237,24 +231,16 @@
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-        // Close sheet before redirecting
-        closeSheet();
-
-        // Small delay to allow animation
+        // Close menu before redirecting
         setTimeout(() => {
+          if (state.menuOpen) {
+            toggleMenu();
+          }
+          // Navigate to WhatsApp
           window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-        }, 200);
+        }, 100);
       }
     });
-  });
-
-  /**
-   * Close sheet on ESC key
-   */
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && state.sheetOpen) {
-      closeSheet();
-    }
   });
 
   /**
@@ -263,7 +249,7 @@
   window.addEventListener(
     'scroll',
     () => {
-      if (state.scrollTriggerFired || state.sheetOpen) return;
+      if (state.scrollTriggerFired || state.menuOpen) return;
 
       const scrollPercent =
         (window.scrollY /
@@ -277,6 +263,33 @@
     },
     { passive: true }
   );
+
+  // ==========================================
+  // Menu Positioning (Arc Layout)
+  // ==========================================
+
+  /**
+   * Position menu items in arc formation above button
+   * Uses CSS custom properties for positioning
+   */
+  function positionMenuItems() {
+    const radius = 70;
+    const startAngle = 180; // Top (changed from 90)
+    const angleSpan = 120; // 120 degree arc (was 180)
+    const itemCount = menuItems.length;
+
+    menuItems.forEach((item, index) => {
+      // Spread items in upward arc
+      const angle = startAngle - (angleSpan / 2) + (angleSpan / (itemCount - 1)) * index;
+      const rad = (angle * Math.PI) / 180;
+
+      const x = Math.cos(rad) * radius;
+      const y = Math.sin(rad) * radius;
+
+      item.style.setProperty('--item-x', `${x}px`);
+      item.style.setProperty('--item-y', `${y}px`);
+    });
+  }
 
   // ==========================================
   // Load Configuration from JSON
@@ -297,7 +310,7 @@
       }
 
       // Store WhatsApp number and messages in data attribute for JS access
-      sheetOptions.forEach((item) => {
+      menuItems.forEach((item) => {
         const action = item.getAttribute('data-action');
         if (action && config.messages && config.messages[action]) {
           item.setAttribute(
@@ -326,6 +339,9 @@
     // Load messages from JSON config
     loadConfigFromJSON();
 
+    // Position menu items in arc
+    positionMenuItems();
+
     // Initial tooltip after delay
     const showInitialTooltip = setTimeout(() => {
       showTooltip(CONFIG.tooltipDuration);
@@ -334,7 +350,7 @@
       const secondTooltipTimer = setTimeout(() => {
         if (
           state.tooltipShown < CONFIG.maxTooltipAppearances &&
-          !state.sheetOpen &&
+          !state.menuOpen &&
           !state.scrollTriggerFired
         ) {
           showTooltip(CONFIG.tooltipDuration);
@@ -356,9 +372,6 @@
    */
   window.addEventListener('beforeunload', () => {
     clearTooltipTimers();
-    if (state.sheetOpen) {
-      closeSheet();
-    }
   });
 
   // ==========================================
