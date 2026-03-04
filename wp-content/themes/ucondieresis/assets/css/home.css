@@ -564,11 +564,12 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #FF4B8D 0%, #E91E63 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
   color: white;
+  font-size: 1.8rem;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(233, 30, 99, 0.3);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -579,23 +580,15 @@
 
 .whatsapp-floating-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 8px 24px rgba(233, 30, 99, 0.5);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5);
 }
 
 .whatsapp-floating-button:active {
   transform: scale(0.95);
 }
 
-.whatsapp-floating-button__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
 .whatsapp-floating-button[aria-expanded="true"] {
-  background: linear-gradient(135deg, #E91E63 0%, #FF4B8D 100%);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
 .whatsapp-floating-button__icon {
@@ -649,10 +642,10 @@
   padding: 8px 12px;
   border-radius: 25px;
   border: none;
-  background: linear-gradient(135deg, #FF4B8D 0%, #E91E63 100%);
-  color: white;
+  background: white;
+  color: #333;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   width: 45px;
   height: 45px;
