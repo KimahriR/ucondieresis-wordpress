@@ -5,11 +5,6 @@
  * @package Ucondieresis
  */
 
-$whatsapp_number = ucondieresis_get_whatsapp_number();
-$whatsapp_number_clean = preg_replace('/\D/', '', $whatsapp_number);
-$whatsapp_message = urlencode(__('Hola, quisiera más información sobre sus productos', 'ucondieresis'));
-$whatsapp_url = 'https://wa.me/' . $whatsapp_number_clean . '?text=' . $whatsapp_message;
-
 $productos_url = get_post_type_archive_link('productos');
 ?>
 
@@ -22,16 +17,47 @@ $productos_url = get_post_type_archive_link('productos');
       <?php esc_html_e('Contáctanos hoy y te enviaremos nuestro catálogo completo con precios y disponibilidad.', 'ucondieresis'); ?>
     </p>
 
-    <!-- Floating WhatsApp Button Integration Point -->
-    <div class="cta__whatsapp-focus" id="cta-whatsapp-focus">
-      <!-- Large WhatsApp Circle Button -->
-      <a href="<?php echo esc_url($whatsapp_url); ?>" 
-         class="cta__whatsapp-circle"
-         target="_blank" 
-         rel="noopener noreferrer"
-         title="<?php esc_attr_e('Contactar por WhatsApp', 'ucondieresis'); ?>">
+    <!-- WhatsApp Menu for CTA Section -->
+    <div class="cta__whatsapp-menu-container" id="cta-whatsapp-focus">
+      <!-- Main Button -->
+      <button 
+        id="cta-whatsapp-btn" 
+        class="cta__whatsapp-button-main"
+        aria-label="<?php esc_attr_e('Abrir opciones de WhatsApp', 'ucondieresis'); ?>"
+        aria-controls="cta-whatsapp-menu"
+        aria-expanded="false">
         <span class="cta__whatsapp-icon">💬</span>
-      </a>
+      </button>
+
+      <!-- Menu Options -->
+      <div id="cta-whatsapp-menu" class="cta__whatsapp-menu" role="menu">
+        <!-- Opción 1: Crear regalo -->
+        <button
+          class="cta__whatsapp-menu-item cta__whatsapp-menu-item--1"
+          data-action="gift"
+          title="<?php esc_attr_e('Crear un regalo', 'ucondieresis'); ?>">
+          <span class="cta__whatsapp-menu-item-icon">💛</span>
+          <span class="cta__whatsapp-menu-item-label"><?php esc_html_e('Crear regalo', 'ucondieresis'); ?></span>
+        </button>
+
+        <!-- Opción 2: Para negocio -->
+        <button
+          class="cta__whatsapp-menu-item cta__whatsapp-menu-item--2"
+          data-action="business"
+          title="<?php esc_attr_e('Para mi negocio', 'ucondieresis'); ?>">
+          <span class="cta__whatsapp-menu-item-icon">🚀</span>
+          <span class="cta__whatsapp-menu-item-label"><?php esc_html_e('Para mi negocio', 'ucondieresis'); ?></span>
+        </button>
+
+        <!-- Opción 3: Mensaje rápido -->
+        <button
+          class="cta__whatsapp-menu-item cta__whatsapp-menu-item--3"
+          data-action="quick"
+          title="<?php esc_attr_e('Mensaje rápido', 'ucondieresis'); ?>">
+          <span class="cta__whatsapp-menu-item-icon">⚡</span>
+          <span class="cta__whatsapp-menu-item-label"><?php esc_html_e('Mensaje rápido', 'ucondieresis'); ?></span>
+        </button>
+      </div>
     </div>
 
     <div class="cta__buttons">

@@ -343,6 +343,9 @@
     // Position menu items in arc
     positionMenuItems();
 
+    // Initialize CTA menu
+    initCTAMenu();
+
     // Setup CTA observer to hide on CTA section
     setupCTAObserver();
 
@@ -368,6 +371,88 @@
   }
 
   // ==========================================
+  // CTA Button Menu Handler
+  // ==========================================
+
+  /**
+   * Initialize CTA WhatsApp menu
+   */
+  function initCTAMenu() {
+    const ctaBtn = document.getElementById('cta-whatsapp-btn');
+    const ctaMenuContainer = document.querySelector('.cta__whatsapp-menu-container');
+    const ctaMenuItems = document.querySelectorAll('.cta__whatsapp-menu-item');
+
+    if (!ctaBtn || !ctaMenuContainer || ctaMenuItems.length === 0) return;
+
+    let ctaMenuOpen = false;
+
+    // Load messages for CTA menu items
+    const configScript = document.getElementById('whatsapp-config');
+    if (configScript) {
+      try {
+        const config = JSON.parse(configScript.textContent);
+        ctaMenuItems.forEach((item) => {
+          const action = item.getAttribute('data-action');
+          if (action && config.messages && config.messages[action]) {
+            item.setAttribute('data-message', config.messages[action]);
+            item.setAttribute('data-whatsapp', config.whatsappNumber);
+          }
+        });
+      } catch (e) {
+        console.warn('CTA WhatsApp config loading error:', e);
+      }
+    }
+
+    // Toggle menu on button click
+    ctaBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      ctaMenuOpen = !ctaMenuOpen;
+      
+      if (ctaMenuOpen) {
+        ctaMenuContainer.classList.add('is-open');
+        ctaBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        ctaMenuContainer.classList.remove('is-open');
+        ctaBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!ctaMenuContainer.contains(e.target) && ctaMenuOpen) {
+        ctaMenuOpen = false;
+        ctaMenuContainer.classList.remove('is-open');
+        ctaBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Menu item click - open WhatsApp
+    ctaMenuItems.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const message = item.getAttribute('data-message');
+        const whatsappNumber = item.getAttribute('data-whatsapp');
+
+        if (message && whatsappNumber) {
+          const encodedMessage = encodeURIComponent(message);
+          const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+          // Close menu before redirecting
+          setTimeout(() => {
+            ctaMenuOpen = false;
+            ctaMenuContainer.classList.remove('is-open');
+            ctaBtn.setAttribute('aria-expanded', 'false');
+            
+            // Navigate to WhatsApp
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+          }, 100);
+        }
+      });
+    });
+  }
+
+  // ==========================================
   // CTA Section Detection
   // ==========================================
 
@@ -377,7 +462,7 @@
    */
   function setupCTAObserver() {
     const ctaSection = document.querySelector('.cta-section');
-    const ctaWhatsappCircle = document.querySelector('.cta__whatsapp-circle');
+    const ctaBtn = document.querySelector('.cta__whatsapp-button-main');
     
     if (!ctaSection) return;
 
@@ -393,17 +478,17 @@
             toggleMenu();
           }
           
-          // Show WhatsApp circle
-          if (ctaWhatsappCircle) {
-            ctaWhatsappCircle.classList.remove('is-hidden');
+          // Show CTA button
+          if (ctaBtn) {
+            ctaBtn.classList.remove('is-hidden');
           }
         } else {
           // CTA is not visible - show floating button
           container.classList.remove('is-hidden');
           
-          // Hide WhatsApp circle
-          if (ctaWhatsappCircle) {
-            ctaWhatsappCircle.classList.add('is-hidden');
+          // Hide CTA button
+          if (ctaBtn) {
+            ctaBtn.classList.add('is-hidden');
           }
         }
       });
