@@ -168,13 +168,14 @@
    * Uses CSS custom properties for positioning
    */
   function positionMenuItems() {
-    const radius = 90;
-    const startAngle = 90; // Top
-    const angleSpan = 180; // Semicircle
+    const radius = 70;
+    const startAngle = 180; // Top (changed from 90)
+    const angleSpan = 120; // 120 degree arc (was 180)
     const itemCount = menuItems.length;
 
     menuItems.forEach((item, index) => {
-      const angle = startAngle + (angleSpan / (itemCount - 1)) * index - 180;
+      // Spread items in upward arc
+      const angle = startAngle - (angleSpan / 2) + (angleSpan / (itemCount - 1)) * index;
       const rad = (angle * Math.PI) / 180;
 
       const x = Math.cos(rad) * radius;
