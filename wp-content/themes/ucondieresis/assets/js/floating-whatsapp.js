@@ -34,6 +34,7 @@
     lastMessageIndex: -1,
     tooltipTimers: [],
     isAnimating: false,
+    ctaVisible: false,
   };
 
   // ==========================================
@@ -342,6 +343,9 @@
     // Position menu items in arc
     positionMenuItems();
 
+    // Setup CTA observer to hide on CTA section
+    setupCTAObserver();
+
     // Initial tooltip after delay
     const showInitialTooltip = setTimeout(() => {
       showTooltip(CONFIG.tooltipDuration);
@@ -361,6 +365,64 @@
     }, CONFIG.initialDelay);
 
     state.tooltipTimers.push(showInitialTooltip);
+  }
+
+  // ==========================================
+  // CTA Section Detection
+  // ==========================================
+
+  /**
+   * Detect when CTA section is in viewport
+   * Hide floating button when CTA is visible
+   */
+  function setupCTAObserver() {
+    const ctaSection = document.querySelector('.cta-section');
+    const ctaWhatsappButton = document.querySelector('.cta__whatsapp-button');
+    const ctaWhatsappVisual = document.querySelector('.cta__whatsapp-visual');
+    
+    if (!ctaSection) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        state.ctaVisible = entry.isIntersecting;
+
+        if (state.ctaVisible) {
+          // CTA is visible - fade out floating button
+          container.classList.add('is-hidden');
+          hideTooltip();
+          if (state.menuOpen) {
+            toggleMenu();
+          }
+          
+          // Show CTA WhatsApp button
+          if (ctaWhatsappButton) {
+            ctaWhatsappButton.classList.add('is-visible');
+          }
+          
+          // Hide visual focus
+          if (ctaWhatsappVisual) {
+            ctaWhatsappVisual.classList.add('is-hidden');
+          }
+        } else {
+          // CTA is not visible - show floating button
+          container.classList.remove('is-hidden');
+          
+          // Hide CTA WhatsApp button
+          if (ctaWhatsappButton) {
+            ctaWhatsappButton.classList.remove('is-visible');
+          }
+          
+          // Show visual focus
+          if (ctaWhatsappVisual) {
+            ctaWhatsappVisual.classList.remove('is-hidden');
+          }
+        }
+      });
+    }, {
+      threshold: 0.5, // Trigger when 50% of CTA is visible
+    });
+
+    observer.observe(ctaSection);
   }
 
   // ==========================================

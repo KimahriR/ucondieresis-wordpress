@@ -5,6 +5,11 @@
  * @package Ucondieresis
  */
 
+$whatsapp_number = ucondieresis_get_whatsapp_number();
+$whatsapp_number_clean = preg_replace('/\D/', '', $whatsapp_number);
+$whatsapp_message = urlencode(__('Hola, quisiera más información sobre sus productos', 'ucondieresis'));
+$whatsapp_url = 'https://wa.me/' . $whatsapp_number_clean . '?text=' . $whatsapp_message;
+
 $productos_url = get_post_type_archive_link('productos');
 ?>
 
@@ -23,6 +28,14 @@ $productos_url = get_post_type_archive_link('productos');
         <span class="cta__whatsapp-icon">💬</span>
         <p class="cta__whatsapp-text"><?php esc_html_e('¿Vamos a crear algo juntos?', 'ucondieresis'); ?></p>
       </div>
+      <!-- WhatsApp Button that appears when floating button fades -->
+      <a href="<?php echo esc_url($whatsapp_url); ?>" 
+         class="cta__whatsapp-button"
+         target="_blank" 
+         rel="noopener noreferrer">
+        <span class="cta__whatsapp-button-icon">💬</span>
+        <span class="cta__whatsapp-button-text"><?php esc_html_e('Contactar por WhatsApp', 'ucondieresis'); ?></span>
+      </a>
     </div>
 
     <div class="cta__buttons">

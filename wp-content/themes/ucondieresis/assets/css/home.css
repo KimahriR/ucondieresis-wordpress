@@ -340,8 +340,11 @@
 /* WhatsApp Focus Point - Visual Integration */
 .cta__whatsapp-focus {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin-bottom: 50px;
+  gap: 20px;
   animation: whatsapp-focus-pulse 3s ease-in-out infinite;
 }
 
@@ -356,6 +359,14 @@
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  animation: whatsapp-visual-appear 0.6s ease-out;
+  opacity: 1;
+}
+
+.cta__whatsapp-visual.is-hidden {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
 }
 
 .cta__whatsapp-focus:hover .cta__whatsapp-visual {
@@ -377,6 +388,49 @@
   opacity: 0.95;
 }
 
+/* WhatsApp Button - Appears when floating button fades */
+.cta__whatsapp-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 32px;
+  background: #25d366;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  pointer-events: none;
+}
+
+.cta__whatsapp-button.is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.cta__whatsapp-button:hover {
+  background: #20ba5a;
+  transform: scale(1.05) translateY(0);
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+}
+
+.cta__whatsapp-button:active {
+  transform: scale(0.98) translateY(0);
+}
+
+.cta__whatsapp-button-icon {
+  font-size: 20px;
+}
+
+.cta__whatsapp-button-text {
+  display: inline;
+}
+
 /* Animations */
 @keyframes whatsapp-focus-pulse {
   0%, 100% {
@@ -384,6 +438,17 @@
   }
   50% {
     opacity: 0.85;
+  }
+}
+
+@keyframes whatsapp-visual-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -532,6 +597,11 @@
   .cta__whatsapp-text {
     font-size: 0.95rem;
   }
+
+  .cta__whatsapp-button {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ============================================
@@ -549,6 +619,13 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+  transition: opacity 0.4s ease;
+  opacity: 1;
+}
+
+.whatsapp-floating-container.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Botón principal circular */
