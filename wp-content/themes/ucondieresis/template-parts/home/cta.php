@@ -24,16 +24,23 @@ $productos_url = get_post_type_archive_link('productos');
 
     <!-- Floating WhatsApp Button Integration Point -->
     <div class="cta__whatsapp-focus" id="cta-whatsapp-focus">
-      <div class="cta__whatsapp-visual">
-        <span class="cta__whatsapp-icon">💬</span>
-        <p class="cta__whatsapp-text"><?php esc_html_e('¿Vamos a crear algo juntos?', 'ucondieresis'); ?></p>
-      </div>
-      <!-- WhatsApp Button that appears when floating button fades -->
+      <!-- Large WhatsApp Circle Button -->
+      <a href="<?php echo esc_url($whatsapp_url); ?>" 
+         class="cta__whatsapp-circle"
+         target="_blank" 
+         rel="noopener noreferrer"
+         title="<?php esc_attr_e('Contactar por WhatsApp', 'ucondieresis'); ?>">
+        <svg class="cta__whatsapp-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.6915026,2.4744748 C15.6693616,0.603226993 12.8043218,0.603226993 10.7821808,2.4744748 L4.75984899,8.2651715 C3.06621909,9.844788 2.10133699,11.9547258 2.10133699,14.1565224 C2.10133699,16.358319 3.06621909,18.4682868 4.75984899,20.0469035 L10.7821808,25.8376002 C12.8043218,27.708848 15.6693616,27.708848 17.6915026,25.8376002 L23.7138345,20.0469035 C25.4074644,18.4682868 26.3723465,16.358319 26.3723465,14.1565224 C26.3723465,11.9547258 25.4074644,9.844788 23.7138345,8.2651715 L17.6915026,2.4744748 Z" fill="#25D366" fill-rule="evenodd"/>
+          <path d="M10.64,17.59 C11.67,18.62 13.06,19.56 14.62,20.23 L15.99,20.23 C16.54,20.23 16.99,19.78 16.99,19.23 L16.99,16.76 C16.99,16.21 16.54,15.76 15.99,15.76 L14.62,15.76 C13.06,16.43 11.67,17.37 10.64,18.4 L10.64,15.93 C10.64,15.38 10.19,14.93 9.64,14.93 C9.09,14.93 8.64,15.38 8.64,15.93 L8.64,18.4 C8.64,18.95 9.09,19.4 9.64,19.4 L12.11,19.4 C12.66,19.4 13.11,18.95 13.11,18.4 C13.11,17.85 12.66,17.4 12.11,17.4 L10.64,17.4 L10.64,17.59 Z" fill="white"/>
+        </svg>
+      </a>
+      
+      <!-- WhatsApp Button Text - Below Circle -->
       <a href="<?php echo esc_url($whatsapp_url); ?>" 
          class="cta__whatsapp-button"
          target="_blank" 
          rel="noopener noreferrer">
-        <span class="cta__whatsapp-button-icon">💬</span>
         <span class="cta__whatsapp-button-text"><?php esc_html_e('Contactar por WhatsApp', 'ucondieresis'); ?></span>
       </a>
     </div>
