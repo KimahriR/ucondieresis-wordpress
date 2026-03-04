@@ -19,6 +19,10 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Floating WhatsApp Button -->
+    <?php get_template_part('template-parts/global/floating-whatsapp'); ?>
+    
     <?php wp_footer(); ?>
 </body>
 </html>
