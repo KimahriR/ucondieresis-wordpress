@@ -377,7 +377,6 @@
    */
   function setupCTAObserver() {
     const ctaSection = document.querySelector('.cta-section');
-    const ctaWhatsappButton = document.querySelector('.cta__whatsapp-button');
     const ctaWhatsappCircle = document.querySelector('.cta__whatsapp-circle');
     
     if (!ctaSection) return;
@@ -394,11 +393,6 @@
             toggleMenu();
           }
           
-          // Show CTA WhatsApp button
-          if (ctaWhatsappButton) {
-            ctaWhatsappButton.classList.add('is-visible');
-          }
-          
           // Show WhatsApp circle
           if (ctaWhatsappCircle) {
             ctaWhatsappCircle.classList.remove('is-hidden');
@@ -406,11 +400,6 @@
         } else {
           // CTA is not visible - show floating button
           container.classList.remove('is-hidden');
-          
-          // Hide CTA WhatsApp button
-          if (ctaWhatsappButton) {
-            ctaWhatsappButton.classList.remove('is-visible');
-          }
           
           // Hide WhatsApp circle
           if (ctaWhatsappCircle) {

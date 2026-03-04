@@ -385,45 +385,6 @@
   display: block;
 }
 
-/* WhatsApp Button Text - Below Circle */
-.cta__whatsapp-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  padding: 14px 32px;
-  background: #25d366;
-  color: white;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
-  transition: all 0.4s ease;
-  opacity: 0;
-  transform: scale(0.95) translateY(10px);
-  pointer-events: none;
-}
-
-.cta__whatsapp-button.is-visible {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-  pointer-events: auto;
-}
-
-.cta__whatsapp-button:hover {
-  background: #20ba5a;
-  transform: scale(1.05) translateY(0);
-  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
-}
-
-.cta__whatsapp-button:active {
-  transform: scale(0.98) translateY(0);
-}
-
-.cta__whatsapp-button-text {
-  display: inline;
-}
-
 /* Animations */
 @keyframes whatsapp-circle-appear {
   from {
@@ -571,10 +532,7 @@
     height: 60px;
   }
 
-  .cta__whatsapp-button {
-    width: 100%;
-    justify-content: center;
-  }
+
 }
 
 /* ============================================
