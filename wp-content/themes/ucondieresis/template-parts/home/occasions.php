@@ -18,9 +18,10 @@ $whatsapp_number_clean = preg_replace('/\D/', '', $whatsapp_number);
 
 <section class="occasions" style="padding: 80px 20px; background: linear-gradient(to bottom, white 0%, rgba(102, 126, 234, 0.02) 100%);">
   <div class="occasions__container" style="max-width: 1200px; margin: 0 auto;">
-    <h2 class="occasions__title" style="font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 70px; color: #333;">
-      Para ese momento especial
-    </h2>
+    <header class="section-header">
+      <h2 class="section-title"><?php esc_html_e('Para ese momento especial', 'ucondieresis'); ?></h2>
+      <p class="section-subtitle"><?php esc_html_e('Encuentra el regalo perfecto para cada ocasión', 'ucondieresis'); ?></p>
+    </header>
 
     <!-- 3 Main Category Cards -->
     <div class="occasions__main-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto;">

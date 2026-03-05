@@ -15,13 +15,14 @@ $whatsapp_number_clean = preg_replace('/\D/', '', $whatsapp_number);
 
 <section class="presentation" style="padding: 80px 20px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);">
   <div class="presentation__container" style="max-width: 1200px; margin: 0 auto;">
-    <h2 class="presentation__title" style="font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 20px; color: #333;">
-      Imprime tu estilo
-    </h2>
-    
-    <p class="presentation__subtitle" style="font-size: 1.1rem; text-align: center; color: #666; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
-      Elige cómo quieres sorprender.
-    </p>
+    <header class="section-header">
+      <h2 class="section-title">
+        <?php esc_html_e('Imprime tu estilo', 'ucondieresis'); ?>
+      </h2>
+      <p class="section-subtitle">
+        <?php esc_html_e('Elige cómo quieres sorprender', 'ucondieresis'); ?>
+      </p>
+    </header>
     
     <div class="presentation__grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
       

@@ -5,6 +5,32 @@
  */
 
 /* ============================================
+   Global Section Header Pattern
+   ============================================ */
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: #6b7280;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ============================================
    Hero Section
    ============================================ */
 .hero {
@@ -82,14 +108,6 @@
   margin: 0 auto;
 }
 
-.occasions__title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 60px;
-  color: #333;
-}
-
 .occasions__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -143,14 +161,6 @@
 .featured__container {
   max-width: 1200px;
   margin: 0 auto;
-}
-
-.featured__title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 60px;
-  color: #333;
 }
 
 .featured__grid {
@@ -248,14 +258,6 @@
   margin: 0 auto;
 }
 
-.how-to-buy__title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 60px;
-  color: #333;
-}
-
 .how-to-buy__steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -319,22 +321,6 @@
   color: white;
   padding: 80px 20px;
   text-align: center;
-}
-
-.cta__title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.cta__subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  font-weight: 300;
-  margin-bottom: 40px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
 }
 
 /* WhatsApp Menu Container - CTA Section */
@@ -830,28 +816,6 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
-}
-
-.home-inspiracion__header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.home-inspiracion__title {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #1a1a1a;
-  letter-spacing: -0.5px;
-}
-
-.home-inspiracion__subtitle {
-  font-size: 1.1rem;
-  color: #666;
-  font-weight: 400;
-  max-width: 500px;
-  margin: 0 auto;
-  line-height: 1.6;
 }
 
 /* Carrusel de Inspiraciones */

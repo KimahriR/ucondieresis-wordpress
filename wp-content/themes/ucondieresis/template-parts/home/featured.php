@@ -8,9 +8,14 @@
 
 <section class="featured">
   <div class="featured__container">
-    <h2 class="featured__title">
-      <?php esc_html_e('De tu idea a algo que se pueda abrazar', 'ucondieresis'); ?>
-    </h2>
+    <header class="section-header">
+      <h2 class="section-title">
+        <?php esc_html_e('De tu idea a algo que se pueda abrazar', 'ucondieresis'); ?>
+      </h2>
+      <p class="section-subtitle">
+        <?php esc_html_e('Nuestros productos más buscados y amados', 'ucondieresis'); ?>
+      </p>
+    </header>
 
     <div class="featured__grid">
       <?php

@@ -32,11 +32,11 @@ if (!$inspirations_query->have_posts()) {
 
 <section class="home-inspiracion" id="home-inspiracion">
     <div class="home-inspiracion__container">
-        <header class="home-inspiracion__header">
-            <h2 class="home-inspiracion__title">
+        <header class="section-header">
+            <h2 class="section-title">
                 <?php esc_html_e('Así cobran vida nuestras ideas', 'ucondieresis'); ?>
             </h2>
-            <p class="home-inspiracion__subtitle">
+            <p class="section-subtitle">
                 <?php esc_html_e('Lo que comenzó como una idea terminó en algo especial', 'ucondieresis'); ?>
             </p>
         </header>

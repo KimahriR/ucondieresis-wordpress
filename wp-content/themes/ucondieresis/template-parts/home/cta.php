@@ -10,12 +10,14 @@ $productos_url = get_post_type_archive_link('productos');
 
 <section class="cta-section">
   <div class="cta-content">
-    <h2 class="cta__title">
-      <?php esc_html_e('Hagamos juntos un regalo que sí emocione', 'ucondieresis'); ?>
-    </h2>
-    <p class="cta__subtitle">
-      <?php esc_html_e('Contáctanos hoy y te enviaremos nuestro catálogo completo con precios y disponibilidad.', 'ucondieresis'); ?>
-    </p>
+    <header class="section-header">
+      <h2 class="section-title">
+        <?php esc_html_e('Hagamos juntos un regalo que sí emocione', 'ucondieresis'); ?>
+      </h2>
+      <p class="section-subtitle">
+        <?php esc_html_e('Contáctanos hoy y te enviaremos nuestro catálogo completo con precios y disponibilidad.', 'ucondieresis'); ?>
+      </p>
+    </header>
 
     <!-- WhatsApp Menu for CTA Section -->
     <div class="cta__whatsapp-menu-container" id="cta-whatsapp-focus">

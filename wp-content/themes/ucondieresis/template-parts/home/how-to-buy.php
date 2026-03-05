@@ -8,9 +8,14 @@
 
 <section class="how-to-buy">
   <div class="how-to-buy__container">
-    <h2 class="how-to-buy__title">
-      <?php esc_html_e('¿Cómo comprar?', 'ucondieresis'); ?>
-    </h2>
+    <header class="section-header">
+      <h2 class="section-title">
+        <?php esc_html_e('¿Cómo comprar?', 'ucondieresis'); ?>
+      </h2>
+      <p class="section-subtitle">
+        <?php esc_html_e('Un proceso simple para conseguir tu regalo personalizado', 'ucondieresis'); ?>
+      </p>
+    </header>
 
     <div class="how-to-buy__steps">
       <div class="step">
