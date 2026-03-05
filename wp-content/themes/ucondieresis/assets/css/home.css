@@ -867,6 +867,7 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-bottom: 10px;
+  padding-right: 60px;
   scroll-snap-type: x mandatory;
   
   /* Ocultar scrollbar nativo pero mantener funcionalidad */
@@ -1056,6 +1057,7 @@
 
   .inspiracion-grid {
     gap: 16px;
+    padding-right: 45px;
   }
 
   .inspiracion-card {
@@ -1113,6 +1115,7 @@
 
   .inspiracion-grid {
     gap: 12px;
+    padding-right: 40px;
   }
 
   .inspiracion-card {

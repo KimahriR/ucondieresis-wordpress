@@ -19,9 +19,13 @@
         const cardWidth = 240;
         const gap = 24;
         const cardWithGap = cardWidth + gap;
-        const autoPlayInterval = 3500; // 3.5 segundos
+        const autoPlayDelay = 6000; // Esperar 6 segundos antes de iniciar
+        const autoPlayInterval = 4000; // Autoplay cada 4 segundos
+        const resumeDelay = 5000; // Reanudar después de 5 segundos de inactividad
         let autoPlayTimer = null;
-        let isAutoPlaying = true;
+        let resumeTimer = null;
+        let autoplayActive = true;
+        let userInteracted = false;
 
         /**
          * Actualizar estado de los botones según la posición del scroll
@@ -42,7 +46,7 @@
          * Auto-play: Scroll automático
          */
         function autoPlay() {
-            if (!isAutoPlaying) return;
+            if (!autoplayActive) return;
 
             const scrollLeft = carousel.scrollLeft;
             const scrollWidth = carousel.scrollWidth;
@@ -65,59 +69,82 @@
         }
 
         /**
-         * Iniciar auto-play
+         * Iniciar auto-play (con delay inicial)
          */
         function startAutoPlay() {
+            // Pausar cualquier timer pendiente
             if (autoPlayTimer) {
                 clearInterval(autoPlayTimer);
             }
-            isAutoPlaying = true;
-            autoPlayTimer = setInterval(autoPlay, autoPlayInterval);
+            if (resumeTimer) {
+                clearTimeout(resumeTimer);
+            }
+
+            // Esperar 6 segundos antes de iniciar autoplay
+            resumeTimer = setTimeout(() => {
+                autoplayActive = true;
+                autoPlayTimer = setInterval(autoPlay, autoPlayInterval);
+            }, autoPlayDelay);
         }
 
         /**
-         * Pausar auto-play
+         * Pausar auto-play y preparar para reanudar
          */
-        function pauseAutoPlay() {
-            isAutoPlaying = false;
+        function pauseAndScheduleResume() {
+            autoplayActive = false;
             if (autoPlayTimer) {
                 clearInterval(autoPlayTimer);
             }
+            if (resumeTimer) {
+                clearTimeout(resumeTimer);
+            }
+
+            // Reanudar después de 5 segundos de inactividad
+            resumeTimer = setTimeout(() => {
+                startAutoPlay();
+            }, resumeDelay);
         }
 
         /**
          * Scroll a la izquierda
          */
         function scrollPrev() {
-            pauseAutoPlay();
+            userInteracted = true;
+            pauseAndScheduleResume();
             carousel.scrollBy({
                 left: -cardWithGap * 2,
                 behavior: 'smooth'
             });
-            // Reanudar después de 5 segundos de inactividad
-            setTimeout(startAutoPlay, 5000);
         }
 
         /**
          * Scroll a la derecha
          */
         function scrollNext() {
-            pauseAutoPlay();
+            userInteracted = true;
+            pauseAndScheduleResume();
             carousel.scrollBy({
                 left: cardWithGap * 2,
                 behavior: 'smooth'
             });
-            // Reanudar después de 5 segundos de inactividad
-            setTimeout(startAutoPlay, 5000);
+        }
+
+        /**
+         * Manejar interacción del usuario
+         */
+        function handleUserInteraction() {
+            userInteracted = true;
+            pauseAndScheduleResume();
         }
 
         // Agregar event listeners
         prevBtn.addEventListener('click', scrollPrev);
         nextBtn.addEventListener('click', scrollNext);
 
-        // Pausar auto-play cuando pasa el mouse
-        carousel.addEventListener('mouseenter', pauseAutoPlay);
-        carousel.addEventListener('mouseleave', startAutoPlay);
+        // Pausar auto-play en interacción del usuario
+        carousel.addEventListener('mouseenter', handleUserInteraction);
+        carousel.addEventListener('touchstart', handleUserInteraction);
+        carousel.addEventListener('scroll', handleUserInteraction);
 
         // Actualizar estado de botones cuando se scrolle
         carousel.addEventListener('scroll', updateButtonStates);
@@ -128,7 +155,7 @@
         // Estado inicial
         updateButtonStates();
         
-        // Iniciar auto-play
+        // Iniciar auto-play con delay
         startAutoPlay();
     }
 

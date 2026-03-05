@@ -34,10 +34,10 @@ if (!$inspirations_query->have_posts()) {
     <div class="home-inspiracion__container">
         <header class="home-inspiracion__header">
             <h2 class="home-inspiracion__title">
-                <?php esc_html_e('Inspiración Social', 'ucondieresis'); ?>
+                <?php esc_html_e('Así cobran vida nuestras ideas', 'ucondieresis'); ?>
             </h2>
             <p class="home-inspiracion__subtitle">
-                <?php esc_html_e('Mira cómo otros hacen que sus regalos sean especiales', 'ucondieresis'); ?>
+                <?php esc_html_e('Lo que comenzó como una idea terminó en algo especial', 'ucondieresis'); ?>
             </p>
         </header>
 
