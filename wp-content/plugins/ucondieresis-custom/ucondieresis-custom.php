@@ -83,6 +83,7 @@ class Plugin {
         // Cargar clases
         require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-cpt-productos.php';
         require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-cpt-inspiraciones.php';
+        require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-cpt-catalogos.php';
         require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-taxonomies.php';
         require_once UCONDIERESIS_PLUGIN_DIR . '/includes/class-whatsapp-utils.php';
         

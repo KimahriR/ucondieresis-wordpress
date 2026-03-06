@@ -122,6 +122,16 @@ function ucondieresis_enqueue_assets() {
         ));
     }
     
+    // CSS para catálogos (archive y singular)
+    if (is_post_type_archive('catalogo') || is_singular('catalogo')) {
+        wp_enqueue_style(
+            'ucondieresis-catalogos',
+            UCONDIERESIS_URI . '/assets/css/catalogos.css',
+            array(),
+            ucondieresis_get_asset_version('assets/css/catalogos.css')
+        );
+    }
+    
     // Header JS (global on all pages) - Scroll detection
     wp_enqueue_script(
         'ucondieresis-header',

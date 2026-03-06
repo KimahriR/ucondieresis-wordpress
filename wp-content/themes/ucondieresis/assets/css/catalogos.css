@@ -1,0 +1,327 @@
+/**
+ * Catálogos - Styles
+ * 
+ * Archive page and cards for downloadable catalogs
+ */
+
+/* ============================================
+   Archive Page Container
+   ============================================ */
+.archive-catalogo {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.archive-catalogo__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================
+   Archive Header
+   ============================================ */
+.archive-catalogo__header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.archive-catalogo__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 15px 0;
+    letter-spacing: -0.5px;
+}
+
+.archive-catalogo__subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   Catalog Grid
+   ============================================ */
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.catalogo-grid__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   Catalog Card
+   ============================================ */
+.catalogo-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.catalogo-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.15);
+}
+
+/* Image Wrapper */
+.catalogo-card__image-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: #f0f0f0;
+    overflow: hidden;
+    position: relative;
+}
+
+.catalogo-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.catalogo-card:hover .catalogo-card__image {
+    transform: scale(1.05);
+}
+
+.catalogo-card__image-wrapper--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f5f5 0%, #efefef 100%);
+}
+
+.catalogo-card__image-placeholder {
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
+/* Content */
+.catalogo-card__content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Title */
+.catalogo-card__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+/* Description */
+.catalogo-card__description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    flex-grow: 1;
+}
+
+.catalogo-card__description p {
+    margin: 0;
+}
+
+/* Button */
+.catalogo-card__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    margin-top: auto;
+}
+
+/* Primary button (active) */
+.catalogo-card__button.btn--primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.catalogo-card__button.btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.catalogo-card__button.btn--primary:active {
+    transform: translateY(0);
+}
+
+/* Disabled button */
+.catalogo-card__button--disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.catalogo-card__button--disabled:hover {
+    background: #e0e0e0;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Button Icon */
+.catalogo-card__button-icon {
+    font-size: 1.1rem;
+}
+
+.catalogo-card__button-text {
+    flex-grow: 1;
+}
+
+/* ============================================
+   Pagination
+   ============================================ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    color: #667eea;
+}
+
+.pagination a:hover {
+    background: #f0f0f0;
+    color: #764ba2;
+}
+
+.pagination .prev,
+.pagination .next {
+    color: #667eea;
+}
+
+.pagination .page-numbers.current {
+    background: #667eea;
+    color: white;
+    font-weight: 600;
+}
+
+.pagination .dots {
+    color: #999;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 768px) {
+    .archive-catalogo {
+        padding: 40px 0;
+    }
+
+    .archive-catalogo__header {
+        margin-bottom: 40px;
+    }
+
+    .archive-catalogo__title {
+        font-size: 2rem;
+    }
+
+    .archive-catalogo__subtitle {
+        font-size: 1rem;
+    }
+
+    .catalogo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .catalogo-card__content {
+        padding: 16px;
+    }
+
+    .catalogo-card__title {
+        font-size: 1.1rem;
+    }
+
+    .catalogo-card__description {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .catalogo-card__button {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .archive-catalogo {
+        padding: 30px 0;
+    }
+
+    .archive-catalogo__container {
+        padding: 0 15px;
+    }
+
+    .archive-catalogo__title {
+        font-size: 1.6rem;
+    }
+
+    .archive-catalogo__subtitle {
+        font-size: 0.95rem;
+    }
+
+    .catalogo-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .catalogo-card__image-wrapper {
+        aspect-ratio: 4 / 5;
+    }
+
+    .catalogo-card__button {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    .catalogo-card__button-icon {
+        font-size: 1rem;
+    }
+}
