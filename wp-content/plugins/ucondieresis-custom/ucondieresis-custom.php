@@ -148,11 +148,10 @@ class Plugin {
         // Registrar taxonomías
         Taxonomies::register();
         
-        // Flush rewrite rules si el CPT de catálogos es nuevo
-        $catalogo_version = get_option('ucondieresis_catalogo_version', '0');
-        if (version_compare($catalogo_version, '1.0.3', '<')) {
-            flush_rewrite_rules();
-            update_option('ucondieresis_catalogo_version', '1.0.3');
+        // Flush rewrite rules si es necesario
+        if (!get_transient('ucondieresis_rewrite_rules_flushed')) {
+            flush_rewrite_rules(false);
+            set_transient('ucondieresis_rewrite_rules_flushed', 1, HOUR_IN_SECONDS);
         }
         
         // Cargar texto de dominio para traducción

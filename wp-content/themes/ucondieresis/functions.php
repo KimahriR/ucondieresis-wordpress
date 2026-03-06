@@ -9,6 +9,11 @@ define('UCONDIERESIS_DIR', get_template_directory());
 define('UCONDIERESIS_URI', get_template_directory_uri());
 
 /**
+ * Ocultar admin bar en el frontend
+ */
+add_filter('show_admin_bar', '__return_false');
+
+/**
  * Helper para obtener versión de archivo (cache busting)
  * 
  * @param string $file_path Ruta del archivo relativa a template directory
