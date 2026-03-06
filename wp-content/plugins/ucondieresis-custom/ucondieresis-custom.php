@@ -148,6 +148,13 @@ class Plugin {
         // Registrar taxonomías
         Taxonomies::register();
         
+        // Flush rewrite rules si el CPT de catálogos es nuevo
+        $catalogo_version = get_option('ucondieresis_catalogo_version', '0');
+        if (version_compare($catalogo_version, '1.0.3', '<')) {
+            flush_rewrite_rules();
+            update_option('ucondieresis_catalogo_version', '1.0.3');
+        }
+        
         // Cargar texto de dominio para traducción
         load_plugin_textdomain('ucondieresis-custom', false, dirname(plugin_basename(UCONDIERESIS_PLUGIN_FILE)) . '/languages');
     }
