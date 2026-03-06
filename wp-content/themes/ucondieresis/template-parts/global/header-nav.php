@@ -51,7 +51,7 @@ if (!defined('ABSPATH')) {
                     </a>
                 </li>
                 <li class="site-header__menu-item">
-                    <a href="#contacto" class="site-header__menu-link">
+                    <a href="#cta-contact" class="site-header__menu-link">
                         <?php esc_html_e('Contacto', 'ucondieresis'); ?>
                     </a>
                 </li>
