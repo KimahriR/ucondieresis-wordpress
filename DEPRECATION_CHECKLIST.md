@@ -80,36 +80,48 @@ ucondieresis_get_asset_version('assets/css/header.css')
 ### P1.4: Enlaces de Navegación Rotos ✅
 **Status**: FIXED  
 **Cambios**:
-- [x] Actualizado `header-nav.php`: `#home-inspiracion` → `#inspiracion`, `#featured` → `#productos`
-- [x] Actualizado `footer.php`: `#home-inspiracion` → `#inspiracion`, remove `#featured`, `#contacto` → `#cta-contact`
+- [x] Actualizado `front-page.php`: Cambiar section ID de `#inspiracion` → `#productos` 
+- [x] Removido ID duplicado en `inspiracion.php`: Quitado el `id="inspiracion"` local
+- [x] Actualizado `header-nav.php`: "Inspiración" link a `#productos` (anteriormente a `#inspiracion`)
+- [x] Actualizado `footer.php`: "Inspiración" link a `#productos` (anteriormente a `#inspiracion`)
 
 **Antes**:
 ```html
+<!-- front-page.php -->
+<section id="inspiracion">  <!-- ❌ Conflicto: dos elementos con IDs -->
+
+<!-- inspiracion.php inner -->
+<section id="inspiracion" class="inspiracion-section">  <!-- ❌ ID duplicado -->
+
 <!-- header-nav.php -->
-<a href="#home-inspiracion">Inspiración</a>
-<a href="#featured">Productos</a>
+<a href="#inspiracion">Inspiración</a>  <!-- ❌ Inconsistente -->
+<a href="#productos">Productos</a>
 
 <!-- footer.php -->
-<a href="#home-inspiracion">Inspiración</a>
-<a href="#featured">Productos</a>
-<a href="#contacto">Contacto</a>
+<a href="#inspiracion">Inspiración</a>  <!-- ❌ Inconsistente -->
 ```
 
 **Después**:
 ```html
+<!-- front-page.php -->
+<section id="productos">  <!-- ✅ ID único y semánticamente correcto -->
+
+<!-- inspiracion.php inner -->
+<section class="inspiracion-section">  <!-- ✅ Sin ID duplicado -->
+
 <!-- header-nav.php -->
-<a href="#inspiracion">Inspiración</a>
+<a href="#productos">Inspiración</a>  <!-- ✅ Consistente -->
 <a href="#productos">Productos</a>
 
 <!-- footer.php -->
-<a href="#inspiracion">Inspiración</a>
-<a href="#cta-contact">Contacto</a>
+<a href="#productos">Inspiración</a>  <!-- ✅ Consistente -->
 ```
 
 **Verificación**:
-- ✅ Header navigation links fixed
-- ✅ Footer navigation links fixed
-- ✅ Links now point to actual section IDs
+- ✅ Todos los links de navegación ahora apuntan a `#productos`
+- ✅ No hay IDs duplicados en el DOM
+- ✅ La sección de productos es accesible desde header y footer
+- ✅ Smooth scroll funciona correctamente
 
 ---
 

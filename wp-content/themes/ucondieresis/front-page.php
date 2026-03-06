@@ -18,7 +18,7 @@ get_header();
     </section>
     
     <!-- Mixed Grid: Productos + Inspiraciones Sociales -->
-    <section id="inspiracion">
+    <section id="productos">
         <?php get_template_part('template-parts/home/inspiracion'); ?>
     </section>
     

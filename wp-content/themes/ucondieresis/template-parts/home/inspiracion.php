@@ -47,7 +47,7 @@ if (!$productos_query->have_posts() && !$inspiraciones_query->have_posts()) {
 }
 ?>
 
-<section class="inspiracion-section" id="inspiracion">
+<section class="inspiracion-section">
     <div class="inspiracion-section__container">
         <header class="section-header">
             <h2 class="section-title">
