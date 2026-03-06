@@ -38,6 +38,22 @@ function ucondieresis_enqueue_assets() {
         UCONDIERESIS_VERSION
     );
     
+    // Header CSS (global on all pages)
+    wp_enqueue_style(
+        'ucondieresis-header',
+        get_template_directory_uri() . '/assets/css/header.css',
+        array(),
+        filemtime(get_template_directory() . '/assets/css/header.css')
+    );
+    
+    // Footer CSS (global on all pages)
+    wp_enqueue_style(
+        'ucondieresis-footer',
+        get_template_directory_uri() . '/assets/css/footer.css',
+        array(),
+        filemtime(get_template_directory() . '/assets/css/footer.css')
+    );
+    
     // CSS para home page
     if (is_front_page()) {
         wp_enqueue_style(
@@ -56,6 +72,24 @@ function ucondieresis_enqueue_assets() {
             true
         );
     }
+    
+    // Header JS (global on all pages) - Scroll detection
+    wp_enqueue_script(
+        'ucondieresis-header',
+        get_template_directory_uri() . '/assets/js/header.js',
+        array(),
+        filemtime(get_template_directory() . '/assets/js/header.js'),
+        true
+    );
+    
+    // Mobile Menu JS (global on all pages)
+    wp_enqueue_script(
+        'ucondieresis-mobile-menu',
+        get_template_directory_uri() . '/assets/js/mobile-menu.js',
+        array(),
+        filemtime(get_template_directory() . '/assets/js/mobile-menu.js'),
+        true
+    );
     
     // JS - Floating WhatsApp Button (en todas las páginas)
     wp_enqueue_script(

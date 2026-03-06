@@ -12,11 +12,25 @@ get_header();
 
 <main id="main" class="site-main home-page">
     <?php get_template_part('template-parts/home/hero'); ?>
-    <?php get_template_part('template-parts/home/occasions'); ?>
-    <?php get_template_part('template-parts/home/featured'); ?>
+    
+    <section id="occasions">
+        <?php get_template_part('template-parts/home/occasions'); ?>
+    </section>
+    
+    <section id="featured">
+        <?php get_template_part('template-parts/home/featured'); ?>
+    </section>
+    
     <?php get_template_part('template-parts/home/inspiracion'); ?>
-    <?php get_template_part('template-parts/home/presentation'); ?>
-    <?php get_template_part('template-parts/home/how-to-buy'); ?>
+    
+    <section id="presentation">
+        <?php get_template_part('template-parts/home/presentation'); ?>
+    </section>
+    
+    <section id="how-to-buy">
+        <?php get_template_part('template-parts/home/how-to-buy'); ?>
+    </section>
+    
     <?php get_template_part('template-parts/home/cta'); ?>
 </main>
 
