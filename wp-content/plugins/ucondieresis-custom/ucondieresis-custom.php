@@ -118,6 +118,7 @@ class Plugin {
         // Registrar CPTs
         CPT_Productos::register();
         CPT_Inspiraciones::register();
+        CPT_Catalogos::register();
         Taxonomies::register();
         
         // Flush rewrite rules
@@ -142,6 +143,7 @@ class Plugin {
         // Registrar CPTs
         CPT_Productos::register();
         CPT_Inspiraciones::register();
+        CPT_Catalogos::register();
         
         // Registrar taxonomías
         Taxonomies::register();

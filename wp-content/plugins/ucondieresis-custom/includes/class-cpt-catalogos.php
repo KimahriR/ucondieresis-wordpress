@@ -180,5 +180,3 @@ class CPT_Catalogos {
     }
 }
 
-// Registrar CPT
-CPT_Catalogos::register();
