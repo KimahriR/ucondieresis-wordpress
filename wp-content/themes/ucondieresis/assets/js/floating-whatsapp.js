@@ -35,6 +35,7 @@
     tooltipTimers: [],
     isAnimating: false,
     ctaVisible: false,
+    ctaSectionVisible: false,
   };
 
   // ==========================================
@@ -68,6 +69,7 @@
   const tooltipText = document.getElementById('tooltip-text');
   const menu = document.getElementById('whatsapp-menu');
   const menuItems = document.querySelectorAll('.whatsapp-menu__item');
+  const ctaSection = document.getElementById('cta-contact');
 
   // Guard clause: stop if elements not found
   if (!container || !mainBtn || !menu) {
@@ -330,6 +332,51 @@
   }
 
   // ==========================================
+  // ==========================================
+  // CTA Section Visibility Detection
+  // ==========================================
+
+  /**
+   * Observe CTA Section visibility with IntersectionObserver
+   * Hide floating button when CTA section is visible
+   */
+  function observeCtaSection() {
+    if (!ctaSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          state.ctaSectionVisible = entry.isIntersecting;
+          updateFloatingButtonVisibility();
+        });
+      },
+      {
+        rootMargin: '0px',
+        threshold: 0.3, // Trigger when 30% of CTA is visible
+      }
+    );
+
+    observer.observe(ctaSection);
+  }
+
+  /**
+   * Update floating button visibility based on CTA section
+   */
+  function updateFloatingButtonVisibility() {
+    if (state.ctaSectionVisible) {
+      // Hide floating button with smooth animation
+      container.style.opacity = '0';
+      container.style.transform = 'scale(0.8)';
+      container.style.pointerEvents = 'none';
+    } else {
+      // Show floating button
+      container.style.opacity = '1';
+      container.style.transform = 'scale(1)';
+      container.style.pointerEvents = 'auto';
+    }
+  }
+
+  // ==========================================
   // Initialize
   // ==========================================
 
@@ -516,8 +563,12 @@
 
   // Wait for DOM to be ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => {
+      init();
+      observeCtaSection();
+    });
   } else {
     init();
+    observeCtaSection();
   }
 })();

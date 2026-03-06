@@ -4,9 +4,23 @@
  */
 
 // Definir constantes
-define('UCONDIERESIS_VERSION', '1.0.0');
+define('UCONDIERESIS_VERSION', '1.0.3');
 define('UCONDIERESIS_DIR', get_template_directory());
 define('UCONDIERESIS_URI', get_template_directory_uri());
+
+/**
+ * Helper para obtener versión de archivo (cache busting)
+ * 
+ * @param string $file_path Ruta del archivo relativa a template directory
+ * @return string Version (filemtime si existe, VERSION por defecto)
+ */
+function ucondieresis_get_asset_version($file_path) {
+    $full_path = get_template_directory() . '/' . $file_path;
+    if (file_exists($full_path)) {
+        return filemtime($full_path);
+    }
+    return UCONDIERESIS_VERSION;
+}
 
 /**
  * Configuración inicial del tema
@@ -41,79 +55,97 @@ function ucondieresis_enqueue_assets() {
     // Header CSS (global on all pages)
     wp_enqueue_style(
         'ucondieresis-header',
-        get_template_directory_uri() . '/assets/css/header.css',
+        UCONDIERESIS_URI . '/assets/css/header.css',
         array(),
-        filemtime(get_template_directory() . '/assets/css/header.css')
+        ucondieresis_get_asset_version('assets/css/header.css')
     );
     
     // Footer CSS (global on all pages)
     wp_enqueue_style(
         'ucondieresis-footer',
-        get_template_directory_uri() . '/assets/css/footer.css',
+        UCONDIERESIS_URI . '/assets/css/footer.css',
         array(),
-        filemtime(get_template_directory() . '/assets/css/footer.css')
+        ucondieresis_get_asset_version('assets/css/footer.css')
     );
     
     // CSS para home page
     if (is_front_page()) {
         wp_enqueue_style(
             'ucondieresis-home',
-            get_template_directory_uri() . '/assets/css/home.css',
+            UCONDIERESIS_URI . '/assets/css/home.css',
             array(),
-            filemtime(get_template_directory() . '/assets/css/home.css')
+            ucondieresis_get_asset_version('assets/css/home.css')
         );
         
         // Contact section CSS
         wp_enqueue_style(
             'ucondieresis-contacto',
-            get_template_directory_uri() . '/assets/css/contacto.css',
+            UCONDIERESIS_URI . '/assets/css/contacto.css',
             array(),
-            filemtime(get_template_directory() . '/assets/css/contacto.css')
+            ucondieresis_get_asset_version('assets/css/contacto.css')
         );
         
-        // JS para carrusel de inspiraciones
-        wp_enqueue_script(
-            'ucondieresis-inspiracion-carousel',
-            get_template_directory_uri() . '/assets/js/inspiracion-carousel.js',
+        // Inspiración section CSS (mixed grid layout)
+        wp_enqueue_style(
+            'ucondieresis-inspiracion',
+            UCONDIERESIS_URI . '/assets/css/inspiracion.css',
             array(),
-            filemtime(get_template_directory() . '/assets/js/inspiracion-carousel.js'),
-            true
+            ucondieresis_get_asset_version('assets/css/inspiracion.css')
         );
         
         // JS para scroll animations
         wp_enqueue_script(
             'ucondieresis-scroll-animations',
-            get_template_directory_uri() . '/assets/js/scroll-animations.js',
+            UCONDIERESIS_URI . '/assets/js/scroll-animations.js',
             array(),
-            filemtime(get_template_directory() . '/assets/js/scroll-animations.js'),
+            ucondieresis_get_asset_version('assets/js/scroll-animations.js'),
             true
         );
+        
+        // CTA WhatsApp Menu Handler
+        wp_enqueue_script(
+            'ucondieresis-cta-whatsapp',
+            UCONDIERESIS_URI . '/assets/js/cta-whatsapp.js',
+            array(),
+            ucondieresis_get_asset_version('assets/js/cta-whatsapp.js'),
+            true
+        );
+        
+        // Localize WhatsApp config (secure data from PHP)
+        wp_localize_script('ucondieresis-cta-whatsapp', 'ucondieresisWhatsApp', array(
+            'number' => '521234567890', // TODO: Mover a wp-config.php o constants
+            'messages' => array(
+                'gift' => __('Hola! Quiero crear un regalo personalizado 💛', 'ucondieresis'),
+                'business' => __('Hola! Tengo una consulta para mi negocio 🚀', 'ucondieresis'),
+                'quick' => __('Hola! Tengo una consulta rápida ⚡', 'ucondieresis'),
+            ),
+        ));
     }
     
     // Header JS (global on all pages) - Scroll detection
     wp_enqueue_script(
         'ucondieresis-header',
-        get_template_directory_uri() . '/assets/js/header.js',
+        UCONDIERESIS_URI . '/assets/js/header.js',
         array(),
-        filemtime(get_template_directory() . '/assets/js/header.js'),
+        ucondieresis_get_asset_version('assets/js/header.js'),
         true
     );
     
     // Mobile Menu JS (global on all pages)
     wp_enqueue_script(
         'ucondieresis-mobile-menu',
-        get_template_directory_uri() . '/assets/js/mobile-menu.js',
+        UCONDIERESIS_URI . '/assets/js/mobile-menu.js',
         array(),
-        filemtime(get_template_directory() . '/assets/js/mobile-menu.js'),
+        ucondieresis_get_asset_version('assets/js/mobile-menu.js'),
         true
     );
     
     // JS - Floating WhatsApp Button (en todas las páginas)
     wp_enqueue_script(
         'ucondieresis-floating-whatsapp',
-        get_template_directory_uri() . '/assets/js/floating-whatsapp.js',
+        UCONDIERESIS_URI . '/assets/js/floating-whatsapp.js',
         array(),
-        filemtime(get_template_directory() . '/assets/js/floating-whatsapp.js'),
+        ucondieresis_get_asset_version('assets/js/floating-whatsapp.js'),
         true
     );
     

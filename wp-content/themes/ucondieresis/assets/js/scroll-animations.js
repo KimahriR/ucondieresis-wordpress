@@ -16,7 +16,7 @@
   'use strict';
 
   // Elements to animate
-  const animationSelector = '.section-header, .home-ocasiones, .featured__grid, .inspiracion-card, .cta__inner, .contact-section__left, .contact-section__right, .contact-info__item';
+  const animationSelector = '.section-header, .home-ocasiones, .featured__grid, .inspiracion-card, .cta__inner, .contact-section__left, .contact-section__right, .contact-info__item, .cta-contact-section__header, .cta-whatsapp-card, .contact-info-card';
 
   // Create intersection observer
   const observerOptions = {

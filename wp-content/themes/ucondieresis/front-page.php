@@ -17,11 +17,10 @@ get_header();
         <?php get_template_part('template-parts/home/occasions'); ?>
     </section>
     
-    <section id="featured">
-        <?php get_template_part('template-parts/home/featured'); ?>
+    <!-- Mixed Grid: Productos + Inspiraciones Sociales -->
+    <section id="inspiracion">
+        <?php get_template_part('template-parts/home/inspiracion'); ?>
     </section>
-    
-    <?php get_template_part('template-parts/home/inspiracion'); ?>
     
     <section id="presentation">
         <?php get_template_part('template-parts/home/presentation'); ?>
@@ -31,10 +30,8 @@ get_header();
         <?php get_template_part('template-parts/home/how-to-buy'); ?>
     </section>
     
-    <?php get_template_part('template-parts/home/cta'); ?>
-    
-    <!-- Contact Section -->
-    <?php get_template_part('template-parts/home/contacto'); ?>
+    <!-- Merged CTA + Contact Section -->
+    <?php get_template_part('template-parts/home/cta-contact'); ?>
 </main>
 
 <?php

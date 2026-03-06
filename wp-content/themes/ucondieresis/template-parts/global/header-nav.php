@@ -36,12 +36,12 @@ if (!defined('ABSPATH')) {
         <div class="site-header__menu-wrapper" id="site-header-menu-wrapper">
             <ul class="site-header__menu" id="site-header-menu">
                 <li class="site-header__menu-item">
-                    <a href="#home-inspiracion" class="site-header__menu-link">
+                    <a href="#inspiracion" class="site-header__menu-link">
                         <?php esc_html_e('Inspiración', 'ucondieresis'); ?>
                     </a>
                 </li>
                 <li class="site-header__menu-item">
-                    <a href="#featured" class="site-header__menu-link">
+                    <a href="#productos" class="site-header__menu-link">
                         <?php esc_html_e('Productos', 'ucondieresis'); ?>
                     </a>
                 </li>
