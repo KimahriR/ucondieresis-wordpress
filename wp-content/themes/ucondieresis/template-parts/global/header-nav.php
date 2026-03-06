@@ -42,7 +42,7 @@ if (!defined('ABSPATH')) {
                 </li>
                 <li class="site-header__menu-item">
                     <a href="#productos" class="site-header__menu-link">
-                        <?php esc_html_e('Productos', 'ucondieresis'); ?>
+                        <?php esc_html_e('Catálogo', 'ucondieresis'); ?>
                     </a>
                 </li>
                 <li class="site-header__menu-item">
