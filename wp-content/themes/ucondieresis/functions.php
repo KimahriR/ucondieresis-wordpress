@@ -63,12 +63,29 @@ function ucondieresis_enqueue_assets() {
             filemtime(get_template_directory() . '/assets/css/home.css')
         );
         
+        // Contact section CSS
+        wp_enqueue_style(
+            'ucondieresis-contacto',
+            get_template_directory_uri() . '/assets/css/contacto.css',
+            array(),
+            filemtime(get_template_directory() . '/assets/css/contacto.css')
+        );
+        
         // JS para carrusel de inspiraciones
         wp_enqueue_script(
             'ucondieresis-inspiracion-carousel',
             get_template_directory_uri() . '/assets/js/inspiracion-carousel.js',
             array(),
             filemtime(get_template_directory() . '/assets/js/inspiracion-carousel.js'),
+            true
+        );
+        
+        // JS para scroll animations
+        wp_enqueue_script(
+            'ucondieresis-scroll-animations',
+            get_template_directory_uri() . '/assets/js/scroll-animations.js',
+            array(),
+            filemtime(get_template_directory() . '/assets/js/scroll-animations.js'),
             true
         );
     }

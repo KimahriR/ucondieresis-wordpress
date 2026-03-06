@@ -34,6 +34,7 @@ if (!defined('ABSPATH')) {
                 <li><a href="#home-inspiracion" class="site-footer__link"><?php esc_html_e('Inspiración', 'ucondieresis'); ?></a></li>
                 <li><a href="#featured" class="site-footer__link"><?php esc_html_e('Productos', 'ucondieresis'); ?></a></li>
                 <li><a href="#how-to-buy" class="site-footer__link"><?php esc_html_e('Cómo comprar', 'ucondieresis'); ?></a></li>
+                <li><a href="#contacto" class="site-footer__link"><?php esc_html_e('Contacto', 'ucondieresis'); ?></a></li>
             </ul>
         </div>
 

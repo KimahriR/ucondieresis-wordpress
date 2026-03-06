@@ -50,6 +50,11 @@ if (!defined('ABSPATH')) {
                         <?php esc_html_e('Cómo comprar', 'ucondieresis'); ?>
                     </a>
                 </li>
+                <li class="site-header__menu-item">
+                    <a href="#contacto" class="site-header__menu-link">
+                        <?php esc_html_e('Contacto', 'ucondieresis'); ?>
+                    </a>
+                </li>
             </ul>
         </div>
 

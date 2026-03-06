@@ -32,6 +32,9 @@ get_header();
     </section>
     
     <?php get_template_part('template-parts/home/cta'); ?>
+    
+    <!-- Contact Section -->
+    <?php get_template_part('template-parts/home/contacto'); ?>
 </main>
 
 <?php

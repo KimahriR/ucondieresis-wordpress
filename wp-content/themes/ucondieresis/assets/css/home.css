@@ -12,6 +12,53 @@ html {
 }
 
 /* ============================================
+   Scroll Animations (IntersectionObserver)
+   ============================================ */
+
+/* Default animation state - hidden */
+.section-header,
+.home-ocasiones,
+.featured__grid,
+.inspiracion-card,
+.cta__inner,
+.contact-section__left,
+.contact-section__right,
+.contact-info__item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animated state - visible */
+.section-header.animate-in,
+.home-ocasiones.animate-in,
+.featured__grid.animate-in,
+.inspiracion-card.animate-in,
+.cta__inner.animate-in,
+.contact-section__left.animate-in,
+.contact-section__right.animate-in,
+.contact-info__item.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children animation */
+.animate-in-child {
+  animation: fadeInSlideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
    Global Section Header Pattern
    ============================================ */
 .section-header {
@@ -48,9 +95,11 @@ html {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px 60px;
   position: relative;
   overflow: hidden;
+  margin-top: 56px;
+}
 }
 
 .hero::before {

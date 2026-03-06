@@ -1,0 +1,337 @@
+/**
+ * Contact Section Styles
+ * 
+ * Two-column contact section with WhatsApp CTA
+ * Premium landing style
+ */
+
+.contact-section {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.03) 0%, rgba(118, 75, 162, 0.03) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="dots" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1.5" fill="rgba(102, 126, 234, 0.08)"/></pattern></defs><rect width="1200" height="600" fill="url(%23dots)"/></svg>');
+  pointer-events: none;
+}
+
+.contact-section__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Left Column: Contact Info */
+.contact-section__left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.contact-section__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-section__title {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.contact-section__subtitle {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  color: #666;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+/* Contact Info Items */
+.contact-section__info {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.contact-info__item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.contact-info__icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: rgba(102, 126, 234, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-info__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-info__item:hover .contact-info__icon {
+  background: rgba(102, 126, 234, 0.15);
+  transform: scale(1.05);
+}
+
+.contact-info__content {
+  flex: 1;
+}
+
+.contact-info__label {
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: -0.2px;
+}
+
+.contact-info__text {
+  margin: 4px 0 0 0;
+  padding: 0;
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.contact-info__link {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.contact-info__link:hover {
+  color: #764ba2;
+}
+
+/* Right Column: CTA */
+.contact-section__right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-section__cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+  background: white;
+  padding: 48px 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section__cta-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.contact-section__cta-wrapper:hover::before {
+  left: 100%;
+}
+
+.contact-section__visual {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 8px;
+}
+
+.contact-section__icon-large {
+  width: 100%;
+  height: 100%;
+  color: #667eea;
+  animation: float 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.contact-section__cta-title {
+  margin: 0;
+  padding: 0;
+  font-size: clamp(1.5rem, 4vw, 1.8rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.contact-section__cta-text {
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+/* WhatsApp Button */
+.contact-section__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #25D366 0%, #1fa857 100%);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.contact-section__button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
+}
+
+.contact-section__button:active {
+  transform: translateY(-1px);
+}
+
+.contact-section__button-icon {
+  display: inline-block;
+  font-size: 1.2rem;
+}
+
+.contact-section__button-text {
+  display: inline;
+}
+
+.contact-section__cta-footer {
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 400;
+}
+
+/* Responsive: Tablet */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 60px 20px;
+  }
+
+  .contact-section__container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contact-section__cta-wrapper {
+    padding: 36px 28px;
+    margin-top: 20px;
+  }
+
+  .contact-section__title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .contact-info__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .contact-info__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Responsive: Mobile */
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 40px 16px;
+  }
+
+  .contact-section__container {
+    gap: 32px;
+  }
+
+  .contact-section__title {
+    font-size: 1.5rem;
+  }
+
+  .contact-section__subtitle {
+    font-size: 0.95rem;
+  }
+
+  .contact-section__info {
+    gap: 20px;
+  }
+
+  .contact-info__item {
+    gap: 12px;
+  }
+
+  .contact-section__cta-wrapper {
+    padding: 28px 20px;
+  }
+
+  .contact-section__cta-title {
+    font-size: 1.3rem;
+  }
+
+  .contact-section__button {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+
+  .contact-section__icon-large {
+    width: 100px;
+    height: 100px;
+  }
+}
