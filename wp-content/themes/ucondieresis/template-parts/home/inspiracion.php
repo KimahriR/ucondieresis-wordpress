@@ -34,10 +34,10 @@ if (!$inspirations_query->have_posts()) {
     <div class="home-inspiracion__container">
         <header class="section-header">
             <h2 class="section-title">
-                <?php esc_html_e('Así cobran vida nuestras ideas', 'ucondieresis'); ?>
+                <?php esc_html_e('Inspírate con nuestras redes', 'ucondieresis'); ?>
             </h2>
             <p class="section-subtitle">
-                <?php esc_html_e('Lo que comenzó como una idea terminó en algo especial', 'ucondieresis'); ?>
+                <?php esc_html_e('Mira cómo nuestros clientes convierten sus ideas en regalos que emocionan.', 'ucondieresis'); ?>
             </p>
         </header>
 
@@ -63,8 +63,13 @@ if (!$inspirations_query->have_posts()) {
                                 />
                                 
                                 <?php if ($plataforma && $url_externa) : 
-                                    $platform_label = ('instagram' === $plataforma) ? 'Instagram' : 'TikTok';
-                                    $platform_icon = ('instagram' === $plataforma) ? '📷' : '🎵';
+                                    if ('facebook' === $plataforma) {
+                                        $platform_label = 'Ver en Facebook';
+                                        $platform_icon = '📘';
+                                    } else {
+                                        $platform_label = 'Ver en TikTok';
+                                        $platform_icon = '🎵';
+                                    }
                                     ?>
                                     <div class="inspiracion-card__overlay">
                                         <a 
@@ -72,7 +77,7 @@ if (!$inspirations_query->have_posts()) {
                                             class="inspiracion-card__link"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            aria-label="<?php printf(esc_attr__('Ver en %s - %s', 'ucondieresis'), $platform_label, the_title_attribute(['echo' => 0])); ?>"
+                                            aria-label="<?php printf(esc_attr__('%s - %s', 'ucondieresis'), $platform_label, the_title_attribute(['echo' => 0])); ?>"
                                         >
                                             <span class="inspiracion-card__badge">
                                                 <span class="badge-icon"><?php echo esc_html($platform_icon); ?></span>

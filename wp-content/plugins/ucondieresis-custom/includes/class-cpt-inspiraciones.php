@@ -104,14 +104,14 @@ class CPT_Inspiraciones {
         ?>
         <div style="margin-bottom: 20px;">
             <label for="url_externa" style="display: block; margin-bottom: 8px; font-weight: 600;">
-                <?php esc_html_e('URL Externa (Instagram o TikTok)', 'ucondieresis-custom'); ?>
+                <?php esc_html_e('URL Externa (Facebook o TikTok)', 'ucondieresis-custom'); ?>
             </label>
             <input 
                 type="url" 
                 id="url_externa" 
                 name="url_externa" 
                 value="<?php echo esc_attr($url_externa); ?>" 
-                placeholder="https://instagram.com/... o https://tiktok.com/..."
+                placeholder="https://facebook.com/... o https://tiktok.com/..."
                 style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;"
             />
             <p style="margin: 8px 0 0 0; font-size: 12px; color: #666;">
@@ -131,8 +131,8 @@ class CPT_Inspiraciones {
                 <option value="" <?php selected($plataforma, ''); ?>>
                     <?php esc_html_e('Seleccionar...', 'ucondieresis-custom'); ?>
                 </option>
-                <option value="instagram" <?php selected($plataforma, 'instagram'); ?>>
-                    <?php esc_html_e('Instagram', 'ucondieresis-custom'); ?>
+                <option value="facebook" <?php selected($plataforma, 'facebook'); ?>>
+                    <?php esc_html_e('Facebook', 'ucondieresis-custom'); ?>
                 </option>
                 <option value="tiktok" <?php selected($plataforma, 'tiktok'); ?>>
                     <?php esc_html_e('TikTok', 'ucondieresis-custom'); ?>
