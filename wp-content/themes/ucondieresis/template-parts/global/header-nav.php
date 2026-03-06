@@ -41,7 +41,7 @@ if (!defined('ABSPATH')) {
                     </a>
                 </li>
                 <li class="site-header__menu-item">
-                    <a href="#productos" class="site-header__menu-link">
+                    <a href="<?php echo esc_url(home_url('/catalogos')); ?>" class="site-header__menu-link">
                         <?php esc_html_e('Catálogo', 'ucondieresis'); ?>
                     </a>
                 </li>

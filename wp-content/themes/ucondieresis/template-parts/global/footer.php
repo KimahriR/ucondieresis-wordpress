@@ -31,7 +31,7 @@ if (!defined('ABSPATH')) {
         <div class="site-footer__column site-footer__nav-column">
             <h4 class="site-footer__column-title"><?php esc_html_e('Navegación', 'ucondieresis'); ?></h4>
             <ul class="site-footer__nav-list">
-                <li><a href="#productos" class="site-footer__link"><?php esc_html_e('Catálogo', 'ucondieresis'); ?></a></li>
+                <li><a href="<?php echo esc_url(home_url('/catalogos')); ?>" class="site-footer__link"><?php esc_html_e('Catálogo', 'ucondieresis'); ?></a></li>
                 <li><a href="#how-to-buy" class="site-footer__link"><?php esc_html_e('Cómo comprar', 'ucondieresis'); ?></a></li>
                 <li><a href="#cta-contact" class="site-footer__link"><?php esc_html_e('Contacto', 'ucondieresis'); ?></a></li>
             </ul>
