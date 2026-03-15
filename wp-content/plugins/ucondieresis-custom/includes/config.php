@@ -12,11 +12,11 @@ if (!defined('UCONDIERESIS_WHATSAPP_NUMBER')) {
     /**
      * Número de WhatsApp Business
      * Formato: +[código país][número]
-     * Ejemplo para México: +525551234567
+     * Ejemplo para México: +528442326171
      * 
      * IMPORTANTE: Reemplaza este valor con tu número real de WhatsApp
      */
-    define('UCONDIERESIS_WHATSAPP_NUMBER', '5215551234567');
+    define('UCONDIERESIS_WHATSAPP_NUMBER', '528442326171');
 }
 
 // Company Information

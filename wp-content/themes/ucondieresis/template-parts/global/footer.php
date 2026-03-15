@@ -59,7 +59,7 @@ if (!defined('ABSPATH')) {
                 </a>
 
                 <!-- WhatsApp -->
-                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" class="site-footer__social-link" aria-label="WhatsApp">
+                <a href="<?php echo 'https://wa.me/' . esc_attr(preg_replace('/\D/', '', ucondieresis_get_whatsapp_number())); ?>" target="_blank" rel="noopener noreferrer" class="site-footer__social-link" aria-label="WhatsApp">
                     <svg class="site-footer__social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                     </svg>
