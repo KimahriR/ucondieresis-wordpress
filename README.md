@@ -1,7 +1,7 @@
 # 🎨 Ucondieresis - Sistema de Productos Personalizados con WhatsApp
 
-**Versión:** 1.0.0 | **Status:** ✅ Production-Ready  
-**WordPress:** 6.9.1 | **PHP:** 8.3.30 | **MySQL:** 8.0
+**Versión:** 1.0.3 | **Status:** ✅ Production-Ready  
+**WordPress:** 6.9.1 | **PHP:** 8.3.30 | **MySQL:** 8.0 | **WhatsApp:** +52 844-232-6171
 
 ---
 
@@ -9,9 +9,17 @@
 
 Sistema WordPress que convierte visitantes en clientes vía WhatsApp.
 
-**Flujo:** Usuario navega productos → Clic "Cotizar" → WhatsApp con mensaje prellenado → Tú cotizas
+**Flujo:** Usuario navega productos/catálogos → Clic "Cotizar" o descarga PDF → WhatsApp con mensaje prellenado → Tú cotizas
 
 **Ventaja:** Sin precios públicos. Todo personalizado por WhatsApp.
+
+**Características:**
+- 🛍️ Sistema de productos personalizados (CPT)
+- 📥 Catálogos descargables en PDF
+- 💬 Integración WhatsApp directa
+- 📱 Responsive mobile-first
+- 🎨 Apple Studio Display inspired design
+- 🔒 Seguridad auditada (v1.0.3)
 
 ---
 
@@ -204,90 +212,161 @@ python3 scripts/retry_download_images.py
 
 ### Productos (CPT: `productos`)
 
-| ID | Título | Ocasión | Categoría | Estado |
-|----|--------|---------|-----------|--------|
-| - | *Vacío - Listo para crear* | - | - | 🟢 PRONTO |
+Sistema completo de productos personalizado. Acede a: `/productos/`
+
+**Meta Boxes:**
+- Ocasión (Taxonomía)
+- Categoría (Taxonomía)
+- Niveles de Personalización (JSON)
+- Información de Cotización (meta fields)
+
+### Catálogos (CPT: `catalogo`) - ✅ NUEVO v1.0.3
+
+Catálogos descargables en PDF. Acede a: `/catalogos/`
+
+**Catálogos Disponibles:**
+| Título | PDF | Estado |
+|--------|-----|--------|
+| Kit Padrinos | ✅ Descargable | 🟢 Activo |
+| Día de la Mujer | ✅ Descargable | 🟢 Activo |
+| Bebé en Camino | ✅ Descargable | 🟢 Activo |
+| San Valentín | ✅ Descargable | 🟢 Activo |
+
+**Meta Box:**
+- Archivo PDF (URL con media picker)
 
 ### Páginas (Post Type: `page`)
 
-| ID | Título | Estado |
-|----|--------|--------|
-| - | *Vacía - Listo para crear* | 🟢 PRONTO |
+- Homepage (index.php con template-parts modular)
+- Secciones integradas: Presentación, Ocasiones, CTA+Contacto
+- Header/Footer con navegación completa
 
-**Nota**: Sistema completamente limpio. Backup disponible en `backup-limpieza-[timestamp].xml`
+### Secciones Activas
+
+✅ **Presentación** - Hero con CTA WhatsApp  
+✅ **Ocasiones** - Grid de ocasiones con enlace a productos  
+✅ **Catálogo** - Acceso desde navegación principal  
+✅ **Cómo Comprar** - Instrucciones proceso  
+✅ **CTA + Contacto** - Sección unificada  
+✅ **Footer** - Links a todas las secciones  
 
 ---
 
-## 🔐 Seguridad y Performance
+## 📋 Estructura del Proyecto
+
+```
+ucondieresis-wordpress/
+├── wp-content/
+│   ├── plugins/
+│   │   └── ucondieresis-custom/              # PLUGIN PRINCIPAL ⭐
+│   │       ├── ucondieresis-custom.php       # Entry point
+│   │       └── includes/
+│   │           ├── config.php                # WhatsApp: +528442326171
+│   │           ├── class-plugin.php
+│   │           ├── class-cpt-productos.php
+│   │           ├── class-cpt-catalogos.php   # ✅ NUEVO
+│   │           ├── class-taxonomies.php
+│   │           ├── class-whatsapp-utils.php
+│   │           └── shortcodes.php
+│   └── themes/
+│       └── ucondieresis/                     # Tema custom
+│           ├── index.php
+│           ├── header.php
+│           ├── footer.php
+│           ├── archive-catalogo.php          # ✅ NUEVO
+│           ├── single-productos.php
+│           ├── functions.php
+│           ├── template-parts/
+│           │   ├── global/
+│           │   │   ├── header-nav.php
+│           │   │   ├── footer.php
+│           │   │   ├── floating-whatsapp.php
+│           │   ├── home/
+│           │   │   ├── presentation.php
+│           │   │   ├── occasions.php
+│           │   │   └── cta-contact.php
+│           │   └── catalog/
+│           │       └── card-catalogo.php     # ✅ NUEVO
+│           ├── assets/
+│           │   ├── css/
+│           │   │   ├── style.css
+│           │   │   ├── catalogos.css         # ✅ NUEVO
+│           │   │   └── [otros]
+│           │   └── js/
+│           └── .htaccess.rules (backup)
+├── .htaccess                                 # ✅ REPARADO - Rewrite rules
+├── docker-compose.yml
+└── README.md (este archivo)
+```
+
+---
+
+## 🔐 Seguridad v1.0.3
 
 ### Implementado
-- ✅ Nonce validation en meta boxes
-- ✅ Sanitización de input
-- ✅ Namespace para evitar conflictos
-- ✅ Debug mode local activado
+- ✅ Validación de nonce en meta boxes
+- ✅ Sanitización de input/output
+- ✅ Namespace `Ucondieresis` para evitar conflictos
+- ✅ Asset versioning con filemtime()
+- ✅ WhatsApp vía `wp_localize_script()` (no hardcoded)
+- ✅ Filemtime checks para File I/O
+- ✅ Admin bar oculto en frontend
+- ✅ Seguridad en headers/footer (esc_url, home_url)
 
-### Roadmap
-- [ ] Instalar security plugin
-- [ ] Implementar caching
-- [ ] Optimizar imágenes
-- [ ] Rate limiting en contacto
+### Auditoría
+- ✅ AUDIT_REPORT.md completado
+- ✅ 3 critical issues resueltos
+- ✅ 4 warnings abordados
 
 ---
 
-## 📅 Timeline Recomendado
+## 📅 Timeline Completado
 
 ```
-HOY (21 Feb)       ✅ FASE 1 COMPLETADA
-└─ Semana 1        🔄 FASE 2: Tema + Home
-   └─ Semana 2     🔄 FASE 2: Media + Contacto
-      └─ Semana 3  ⏳ FASE 2: Testing
-         └─ Semana 4 (20 Mar) ⏳ FASE 3: GoDaddy Deploy
+✅ Fase 1 (22 Feb)          COMPLETADA - Fundamento técnico
+✅ Fase 2 (22 Feb - 15 Mar) COMPLETADA - Sitio funcional
+├─ ✅ Tema base (Apple Studio inspired)
+├─ ✅ CPT Productos + Meta boxes
+├─ ✅ CPT Catálogos + PDFs ✨ NUEVO
+├─ ✅ Navegación completa
+├─ ✅ WhatsApp integrado
+├─ ✅ Header/Footer actualizado
+└─ ✅ .htaccess & rewrite rules
+
+🎯 Fase 3 (Próximo) Optimización & Deployment
 ```
 
-**Fecha Crítica**: 20 Marzo, 2026
-- Sitio Weebly original se elimina en GoDaddy
-- Necesitamos estar live antes
+**Fecha Objetivo**: Listo para producción en GoDaddy
 
 ---
 
-## 🎨 Guías Importantes
+## 🔗 URLs en Vivo
 
-### Valores de Marca (ver `.copilot-context.md`)
-- Personalización como diferenciador clave
-- Calidad artesanal + tecnología moderna
-- Enfoque al cliente individual
-- México como mercado principal
-
-### Reglas Técnicas
-1. Usar namespaces `Ucondieresis`
-2. Comentarios en español/inglés
-3. DRY principle - helpers para queries comunes
-4. WordPress standards y hooks
-5. Validar TODO user input
-6. Testing antes de merge
-7. Documentar cambios importantes
-8. Mantener changelog
-9. No hardcodear valores
+| Sección | URL | Estado |
+|---------|-----|--------|
+| **Frontend** | http://localhost:8000 | ✅ Activo |
+| **Productos** | http://localhost:8000/productos | ✅ Activo |
+| **Catálogos** | http://localhost:8000/catalogos | ✅ Activo ✨ NUEVO |
+| **Admin** | http://localhost:8000/wp-admin | ✅ Activo |
+| **WhatsApp** | wa.me/528442326171 | ✅ Activo |
 
 ---
 
-## 🔗 URLs Importantes
+## 📞 Información de Contacto
 
-| Recurso | URL |
-|---------|-----|
-| **Frontend** | http://localhost:8000 |
-| **Admin** | http://localhost:8000/wp-admin |
-| **Productos** | http://localhost:8000/productos |
-| **Producto Único** | http://localhost:8000/?productos=taza-personalizada-geometrica |
-| **Debug Log** | `/wp-content/debug.log` (local) |
+**WhatsApp Business:** +52 844-232-6171  
+**Email:** (Ver wp-admin settings)  
+**Repositorio:** https://github.com/KimahriR/ucondieresis-wordpress
 
 ---
 
-## 📞 Contacto / Notas
+## 📝 Changelog Reciente (v1.0.3)
 
-- **Backup Original**: `/Users/ericklopez/Library/Mobile Documents/com~apple~CloudDocs/Code/ucondieresis-backup/`
-- **WXR Generado**: `/Users/ericklopez/Library/Mobile Documents/com~apple~CloudDocs/Code/ucondieresis-wordpress/ucondieresis-wxr-full.xml`
-- **Status Notificaciones**: Ver GitHub issues / discussion
+- 🔧 **15 Mar**: Reparado archive-catalogo.php, .htaccess rewrite rules
+- 🔧 **15 Mar**: Actualizado header/footer navigation links
+- ✨ **15 Mar**: Actualizado WhatsApp a +528442326171
+- 🔒 **Antes**: Security audit completado, admin bar hidden
+- ✨ **6 Mar**: Catálogos CPT + archivos PDF creados
 
 ---
 
