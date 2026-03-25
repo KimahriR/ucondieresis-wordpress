@@ -48,6 +48,16 @@ build/
 
 # === LOGS ===
 debug.log
+
+# === BACKUPS & EXPORTS ===
+*.xml
+*.wxr
+backup-*.xml
+ucondieresis-*.xml
+backups/
+backup-estado-*.xml
+backup-limpieza-*.xml
+backup-workspace-*.xml
 error.log
 *.log
 /wp-content/debug.log

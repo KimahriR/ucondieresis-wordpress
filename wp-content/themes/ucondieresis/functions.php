@@ -49,6 +49,14 @@ add_action('after_setup_theme', 'ucondieresis_setup');
  * Enqueue de estilos y scripts
  */
 function ucondieresis_enqueue_assets() {
+    // Google Fonts - Great Vibes (premium script typography)
+    wp_enqueue_style(
+        'ucondieresis-google-fonts',
+        'https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap',
+        array(),
+        UCONDIERESIS_VERSION
+    );
+    
     // CSS
     wp_enqueue_style(
         'ucondieresis-style',
@@ -117,8 +125,12 @@ function ucondieresis_enqueue_assets() {
         );
         
         // Localize WhatsApp config (secure data from PHP)
+        $whatsapp_number = function_exists('ucondieresis_get_whatsapp_number') 
+            ? ucondieresis_get_whatsapp_number() 
+            : (defined('UCONDIERESIS_WHATSAPP_NUMBER') ? UCONDIERESIS_WHATSAPP_NUMBER : '528442326171');
+        
         wp_localize_script('ucondieresis-cta-whatsapp', 'ucondieresisWhatsApp', array(
-            'number' => '521234567890', // TODO: Mover a wp-config.php o constants
+            'number' => esc_js($whatsapp_number),
             'messages' => array(
                 'gift' => __('Hola! Quiero crear un regalo personalizado 💛', 'ucondieresis'),
                 'business' => __('Hola! Tengo una consulta para mi negocio 🚀', 'ucondieresis'),
