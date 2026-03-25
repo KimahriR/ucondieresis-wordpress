@@ -25,10 +25,10 @@ body {
 }
 
 /* Header */
+/* Note: Header styling is handled by header.css */
+/* Do not override background here to allow two-state system */
 .site-header {
-    background-color: var(--white);
-    border-bottom: 1px solid var(--border-color);
-    padding: 20px 0;
+    /* Background managed by header.css (transparent/scrolled states) */
 }
 
 .site-branding {
