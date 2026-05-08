@@ -106,6 +106,15 @@ function ucondieresis_enqueue_assets() {
             ucondieresis_get_asset_version('assets/css/inspiracion.css')
         );
         
+        // Hero Letter Animation (Staggered entry effect)
+        wp_enqueue_script(
+            'ucondieresis-hero-animations',
+            UCONDIERESIS_URI . '/assets/js/hero-animations.js',
+            array(),
+            ucondieresis_get_asset_version('assets/js/hero-animations.js'),
+            true
+        );
+        
         // JS para scroll animations
         wp_enqueue_script(
             'ucondieresis-scroll-animations',

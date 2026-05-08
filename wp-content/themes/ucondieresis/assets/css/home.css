@@ -118,6 +118,24 @@ html {
   }
 }
 
+@keyframes letterSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Letter Animation - Staggered Entry */
+.hero__title.hero-animate .hero-letter {
+  display: inline-block;
+  animation: letterSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  will-change: transform, opacity;
+}
+
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -178,9 +196,9 @@ html {
   will-change: transform, opacity;
 }
 
-/* Animation class for title fade-up */
+/* Animation class for title fade-up - DEPRECATED (now uses letter animation) */
 .hero__title.fade-up {
-  animation: fadeUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  /* Animation handled by JS with per-letter stagger */
 }
 
 /* Hero Subtitle - Elegant & Light in Great Vibes */
