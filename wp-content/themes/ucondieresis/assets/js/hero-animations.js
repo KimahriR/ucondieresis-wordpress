@@ -17,6 +17,46 @@
   });
 
   /**
+   * Detectar si la navegación fue una recarga (reload)
+   * y forzar el scroll al hero cuando la página termine de cargar.
+   */
+  function isPageReload() {
+    try {
+      if (performance && performance.getEntriesByType) {
+        const navEntries = performance.getEntriesByType('navigation');
+        if (navEntries && navEntries.length) {
+          return navEntries[0].type === 'reload';
+        }
+      }
+      // Fallback (deprecated API)
+      if (performance && performance.navigation) {
+        return performance.navigation.type === performance.navigation.TYPE_RELOAD;
+      }
+    } catch (e) {
+      return false;
+    }
+    return false;
+  }
+
+  window.addEventListener('load', function () {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    // Solo forzar scroll si la navegación fue una recarga
+    if (isPageReload()) {
+      // Evitar que el navegador restaure la posición por defecto
+      if ('scrollRestoration' in history) {
+        try { history.scrollRestoration = 'manual'; } catch (e) {}
+      }
+
+      // Pequeño delay para asegurar que layout esté listo
+      setTimeout(() => {
+        hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  });
+
+  /**
    * Animar las letras del hero
    * Cada letra obtiene un delay progresivo
    */
