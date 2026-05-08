@@ -31,13 +31,20 @@
     // Limpiar el contenido actual
     heroTitle.innerHTML = '';
 
-    // Crear spans para cada letra (incluyendo espacios)
+    // Crear spans para cada letra (incluyendo espacios).
+    // Reemplazamos los espacios por non-breaking-space para preservarlos visualmente.
     const letters = originalText.split('');
-    
+
     letters.forEach((letter, index) => {
       const span = document.createElement('span');
-      span.textContent = letter;
       span.className = 'hero-letter';
+      // Preservar espacios visibles en el DOM
+      if (letter === ' ' || letter === '\t' || letter === '\n') {
+        span.textContent = '\u00A0';
+        span.classList.add('hero-space');
+      } else {
+        span.textContent = letter;
+      }
       span.style.animationDelay = `${index * 0.05}s`;
       heroTitle.appendChild(span);
     });
