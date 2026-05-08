@@ -18,6 +18,7 @@
   background: #AB3DF5;
   color: #FFFFFF;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'Futura', 'Trebuchet MS', sans-serif;
 }
 
 .site-footer__container {
@@ -65,6 +66,13 @@
   transition: color 0.3s ease;
 }
 
+.site-footer__brand-title .logo-text {
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: #FFFFFF;
+}
+
 .site-footer__brand-title:hover .logo-char--special {
   color: #AB8FD4;
 }
@@ -98,6 +106,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: #FFFFFF;
+  font-family: 'Futura', 'Trebuchet MS', sans-serif;
 }
 
 .site-footer__nav-list {
@@ -122,6 +131,7 @@
   position: relative;
   display: inline-block;
   padding: 2px 0;
+  font-family: 'Futura', 'Trebuchet MS', sans-serif;
 }
 
 .site-footer__link:hover {
@@ -166,6 +176,7 @@
   font-size: 0.95rem;
   transition: all 0.3s ease;
   position: relative;
+  font-family: 'Futura', 'Trebuchet MS', sans-serif;
 }
 
 .site-footer__social-link:hover {
@@ -222,6 +233,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   letter-spacing: 0.3px;
+  font-family: 'Futura', 'Trebuchet MS', sans-serif;
 }
 
 .site-footer__cta-button:hover {
