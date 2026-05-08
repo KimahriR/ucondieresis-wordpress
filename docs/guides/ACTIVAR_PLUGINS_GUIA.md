@@ -200,7 +200,7 @@ Una vez activados los plugins:
    - Configurar HTTPS
    - Preparar base de datos
 
-3. **Si hay problemas**: Revisar `SOPORTE_TECNICO.md`
+3. **Si hay problemas**: Revisar `../archive/operations/SOPORTE_TECNICO.md`
 
 ---
 
@@ -208,9 +208,8 @@ Una vez activados los plugins:
 
 Si necesitas más info:
 - Leer: `DEPLOYMENT_FINAL_CHECKLIST.md`
-- Leer: `SECURITY_AUDIT_v1.0.3.md`
+- Leer: `../archive/audits/SECURITY_AUDIT_v1.0.3.md`
 - Revisar: `debug.log` en `wp-content/`
 
 **Estado actual**: 🟡 Esperando activación de plugins  
 **Disponible en**: http://localhost:8000/wp-admin
-

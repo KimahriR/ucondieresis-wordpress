@@ -22,7 +22,7 @@
   - X-XSS-Protection: 1; mode=block
   - Permisos de características para privacidad
 
-- [x] **Fix 4**: Documentación completa en AUDIT_DEBUGGING_v1.0.4.md
+- [x] **Fix 4**: Documentación completa en `../archive/audits/AUDIT_DEBUGGING_v1.0.4.md`
 
 ---
 
@@ -267,4 +267,3 @@ Testing:          ⏳ Manual (tú)
 
 **Documento final de deployment**  
 **Status**: LISTO PARA PRODUCCIÓN ✅
-

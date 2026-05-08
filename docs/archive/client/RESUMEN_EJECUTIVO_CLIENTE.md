@@ -101,7 +101,7 @@ Todos los elementos visuales actualizados y consistentes.
 - Certificado SSL listo
 - Headers de seguridad implementados
 
-*Ver: [SECURITY_AUDIT_v1.0.3.md](SECURITY_AUDIT_v1.0.3.md) para detalles completos*
+*Ver: [SECURITY_AUDIT_v1.0.3.md](../audits/SECURITY_AUDIT_v1.0.3.md) para detalles completos*
 
 ---
 

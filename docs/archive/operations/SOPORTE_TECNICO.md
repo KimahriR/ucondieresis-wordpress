@@ -67,7 +67,7 @@ Línea 20: define('UCONDIERESIS_WHATSAPP_NUMBER', '???');
    WordPress Admin → Productos
    ¿Hay al menos 1 producto?
    
-2. Si no hay → Crear producto (ver QUICK_START.md)
+2. Si no hay → Crear producto (ver ../../guides/QUICK_START.md)
 
 3. Si hay productos:
    a) Abre cada producto
